@@ -31,6 +31,31 @@
     </entry>
     
     
+    
+    <entry>
+      <title>HelloWorld</title>
+      <link href="/2018/05/05/HelloWorld/"/>
+      <url>/2018/05/05/HelloWorld/</url>
+      
+        <content type="html"><![CDATA[<p>摘要测试</p><a id="more"></a><center>内容测试</center>]]></content>
+      
+      
+      <categories>
+          
+          <category> 测试 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 测试 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
   
   
 </search>
