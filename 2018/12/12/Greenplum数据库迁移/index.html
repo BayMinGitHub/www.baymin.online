@@ -294,9 +294,9 @@
 <p>② CentOS 7.3 镜像 ( 与老服务器相同 )</p>
 <p>③ Greenplum 4.3.7.3 安装包 ( <a href="https://network.pivotal.io/products/pivotal-gpdb/" target="_blank" rel="noopener">https://network.pivotal.io/products/pivotal-gpdb/</a> )</p>
 <h4 id="2-安装虚拟机"><a href="#2-安装虚拟机" class="headerlink" title="2.安装虚拟机"></a>2.安装虚拟机</h4><p>修改时区，最小安装：</p>
-<p><img src="/2018/12/12/Greenplum数据库迁移/" alt="https://img.vim-cn.com/bc/2bd07b48aa9868a53351be1e2f3eadefe17a65.png"></p>
+<p><img src="https://img.vim-cn.com/bc/2bd07b48aa9868a53351be1e2f3eadefe17a65.png" alt></p>
 <p>添加root用户密码：</p>
-<p><img src="/2018/12/12/Greenplum数据库迁移/2.png" alt></p>
+<p><img src="https://img.vim-cn.com/e2/6844fd5ab076e93eb004d2405345e0ca0f37f8.png" alt></p>
 <p>安装完成后，修改IP地址：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/sysconfig/netword-scripts/ifcfg-eno***</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">TYPE=Ethernet</span><br><span class="line">BOOTPROTO=static</span><br><span class="line">DEFROUTE=yes</span><br><span class="line">PEERDNS=yes</span><br><span class="line">PEERROUTES=yes</span><br><span class="line">IPV4_FAILURE_FATAL=no</span><br><span class="line">IPV6INIT=yes</span><br><span class="line">IPV6_AUTOCONF=yes</span><br><span class="line">IPV6_DEFROUTE=yes</span><br><span class="line">IPV6_PEERDNS=yes</span><br><span class="line">IPV6_PEERROUTES=yes</span><br><span class="line">IPV6_FAILURE_FATAL=no</span><br><span class="line">NAME=eno16777736</span><br><span class="line">UUID=5bed79bf-0f21-40fe-a92c-63aa29d0dbdd</span><br><span class="line">DEVICE=eno16777736</span><br><span class="line">ONBOOT=yes</span><br><span class="line">IPADDR=192.168.216.128</span><br><span class="line">NETMASK=255.255.255.0</span><br><span class="line">GATEWAY=192.168.216.2</span><br><span class="line">DNS1=114.114.114.114</span><br><span class="line">DNS2=8.8.8.8</span><br></pre></td></tr></table></figure>
@@ -324,7 +324,7 @@
 <p>重启，准备安装数据库。</p>
 <h4 id="4-安装数据库"><a href="#4-安装数据库" class="headerlink" title="4.安装数据库"></a>4.安装数据库</h4><p>首先在Master节点上操作：</p>
 <p>​    切换用户gpadmin，解压下载的数据库文件并运行greenplum-db-*.bin安装文件 ( 安装过程中注意数据库安装位置 )</p>
-<p><img src="/2018/12/12/Greenplum数据库迁移/3.png" alt></p>
+<p><img src="https://img.vim-cn.com/3b/1912bbe9d46419b8f264ba46582b81e2c6e0c2.png" alt></p>
 <p>创建配置文件：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir ./conf</span><br></pre></td></tr></table></figure>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ./conf/hostlist</span><br></pre></td></tr></table></figure>
@@ -340,7 +340,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">原因 hosts 里没有配置 hostname 中的 IP</span><br></pre></td></tr></table></figure>
 <p>开始安装数据库：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gpseginstall -f hostlist -u gpadmin -p 123456</span><br></pre></td></tr></table></figure>
-<fancybox><img src="/2018/12/12/Greenplum数据库迁移/4.png" alt></fancybox>
+<fancybox><img src="https://img.vim-cn.com/d5/7b15f39363f657e38b027309b3539c66a209d8.png" alt></fancybox>
 
 <p>在不同节点上创建数据目录：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>gp_master_standby:</span><br><span class="line">mkdir -p /home/gpadmin/gpdata/gpmaster</span><br><span class="line"><span class="meta">#</span>sdw1_standby:</span><br><span class="line">mkdir -p /home/gpadmin/gpdata/gpdata1</span><br><span class="line">mkdir -p /home/gpadmin/gpdata/gpdatap1</span><br><span class="line">mkdir -p /home/gpadmin/gpdata/gpdatap2</span><br><span class="line">mkdir -p /home/gpadmin/gpdata/gpdatam1</span><br><span class="line">mkdir -p /home/gpadmin/gpdata/gpdatam2</span><br><span class="line"><span class="meta">#</span>sdw2_standby</span><br><span class="line">mkdir -p /home/gpadmin/gpdata/gpmaster</span><br><span class="line">mkdir -p /home/gpadmin/gpdata/gpdatap1</span><br><span class="line">mkdir -p /home/gpadmin/gpdata/gpdatap2</span><br><span class="line">mkdir -p /home/gpadmin/gpdata/gpdatam1</span><br><span class="line">mkdir -p /home/gpadmin/gpdata/gpdatam2</span><br></pre></td></tr></table></figure>
@@ -369,10 +369,10 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gpssh-exkeys -f /home/gpadmin/conf/transhost</span><br></pre></td></tr></table></figure>
 <p>开始迁移数据：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/home/gpadmin/greenplum-db-4.3.7.3/bin//gptransfer --source-map-file=/home/gpadmin/conf/transferlist --dest-host=192.168.216.128 --full</span><br></pre></td></tr></table></figure>
-<fancybox><img src="/2018/12/12/Greenplum数据库迁移/5.png" alt></fancybox>
+<fancybox><img src="https://img.vim-cn.com/0e/a93306672759c753ca0429f483430b24f8d431.png" alt></fancybox>
 
 <p>迁移完毕：</p>
-<fancybox><img src="/2018/12/12/Greenplum数据库迁移/6.png" alt></fancybox>
+<fancybox><img src="https://img.vim-cn.com/cc/57fcbcb9ebcf4983d5170a979b7d212554b875.png" alt></fancybox>
 
 <p>将源数据库中的配置文件postgresql.conf和pg_hba.conf发送至目标数据库中，重启目标数据库。</p>
 <p>至此数据库迁移完毕。</p>
@@ -389,7 +389,7 @@
     <div class="new-meta-box">
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-05-13T16:11:45+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-05-13T16:15:43+08:00">
   <a class="notlink">
     <i class="fas fa-clock" aria-hidden="true"></i>
     <p>最后更新于 2019年5月13日</p>
