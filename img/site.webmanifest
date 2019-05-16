@@ -1,6 +1,5 @@
 {
     "name": "兔子的个人小站",
-    "short_name": "Rabi?",
     "icons": [
         {
             "src": "https://39.97.115.194/img/icon.png",
@@ -12,8 +11,5 @@
             "sizes": "512x512",
             "type": "image/png"
         }
-    ],
-    "theme_color": "#c9834b",
-    "background_color": "#ffffff",
-    "display": "standalone"
+    ]
 }

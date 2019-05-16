@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>Linux系统下搭建饥荒专用服务器（阿里云主机） | 兔子的个人小站</title>
+  
+  <meta name="keywords" content="博客，游戏分享，个人日志">
+  
+  
+  <meta name="description" content="在Linux系统下搭建饥荒专用服务器, 博客,游戏">
+  
+
+  
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+  
+  <meta name="copyright" content="BayMin">
+  <meta name="theme-color" content="#c9834b">
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.6.3/css/all.min.css">
+  
+  
+  <link rel="shortcut icon" type="image/x-icon" href="https://39.97.115.194/img/favicon.ico">
+  <link rel="icon" sizes="192x192" href="https://39.97.115.194/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="https://39.97.115.194/img/favicon.ico">
+  <link rel="manifest" href="https://39.97.115.194/img/site.webmanifest">
+  
+
+  
+  <link rel="shortcut icon" type="image/x-icon" href="https://39.97.115.194/img/favicon.ico">
+  
+
+  
+    <link rel="stylesheet" href="/style.css">
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-139607175-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-139607175-1');
+    </script>
+  
+  
+</head>
+
+
+<body>
+  
+  
+  <header class="l_header material">
+  <div id="loading-bar-wrapper">
+    <div id="loading-bar" class="material"></div>
+  </div>
+
+	<div class="wrapper">
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href="/">
+        
+          兔子的个人小站
+        
+      </a>
+			<div class="menu navgation">
+				<ul class="h-list">
+          
+  					
+  						<li>
+								<a class="nav flat-box" href="/" id="home">
+									<i class="fas fa-grin fa-fw"></i>&nbsp;文章
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/categories/" rel="nofollow" id="categories">
+									<i class="fas fa-folder-open fa-fw"></i>&nbsp;分类
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/tags/" rel="nofollow" id="tags">
+									<i class="fas fa-tags fa-fw"></i>&nbsp;标签
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/archives/" rel="nofollow" id="archives">
+									<i class="fas fa-archive fa-fw"></i>&nbsp;归档
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="搜索">
+						<i class="icon fas fa-search fa-fw"></i>
+					</form>
+				</div>
+			
+			<ul class="switcher h-list">
+				
+					<li class="s-search"><a class="fas fa-search fa-fw" href="javascript:void(0)"></a></li>
+				
+				<li class="s-menu"><a class="fas fa-bars fa-fw" href="javascript:void(0)"></a></li>
+			</ul>
+		</div>
+
+		<div class="nav-sub container container--flex">
+			<a class="logo flat-box"></a>
+			<ul class="switcher h-list">
+				<li class="s-comment"><a class="flat-btn fas fa-comments fa-fw" href="javascript:void(0)"></a></li>
+        
+          <li class="s-toc"><a class="flat-btn fas fa-list fa-fw" href="javascript:void(0)"></a></li>
+        
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu navgation">
+      <ul>
+        
+          
+            <li>
+							<a class="nav flat-box" href="/" id="home">
+								<i class=" fa-fw"></i>&nbsp;
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/" id="home">
+								<i class="fas fa-clock fa-fw"></i>&nbsp;近期文章
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/archives/" rel="nofollow" id="archives">
+								<i class="fas fa-archive fa-fw"></i>&nbsp;文章归档
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/friends/" rel="nofollow" id="friends">
+								<i class="fas fa-link fa-fw"></i>&nbsp;我的友链
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/about/" rel="nofollow" id="about">
+								<i class="fas fa-info-circle fa-fw"></i>&nbsp;关于小站
+							</a>
+            </li>
+          
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+<script>setLoadingBarProgress(40);</script>
+
+
+
+  <div class="l_body nocover">
+    <div class='body-wrapper'>
+      <div class="l_main">
+  
+
+  
+    <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/2019/04/24/Linux系统下搭建饥荒专用服务器/">
+        Linux系统下搭建饥荒专用服务器（阿里云主机）
+      </a>
+    </h1>
+  
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="https://39.97.115.194" rel="nofollow">
+      
+        <img src="https://39.97.115.194/img/index_logo.png">
+      
+      <p>BayMin</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-04-24</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item category">
+    <a href="/categories/游戏服务器/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>游戏服务器</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class="notlink">
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          <p>从零开始的饥荒专用服务器教程~~~</p>
+<a id="more"></a>
+<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>经常玩单机游戏的玩家都会知道，在联机过程中房主的网络状态和电脑性能影响着整个房间中玩家的游戏体验，在房主网络状态差或电脑性能低的时候，经常会出现卡顿，丢包甚至掉线的情况。这是由于在房主开游戏的时候，会在其电脑本地启动一个服务器端，然后玩家的游戏客户端都与这个服务器端连接，进行联机游戏，当房主电脑性能不足或者网络波动时，必定会影响整个服务器中的玩家体验。</p>
+<h4 id="1-准备"><a href="#1-准备" class="headerlink" title="1.准备"></a>1.准备</h4><p>① 用来买云主机的 Money … ( 嗯 … 钱是很重要的 .. 不过可以考虑一下学生机 ,如果还是学生的话 )</p>
+<p>② 一台可以上网的电脑 ( 废话 ) </p>
+<p>③ SSH连接工具 ( 推荐Xshell,<a href="https://pan.baidu.com/s/1qe4Kz3Jj2xu-f2ct0YLA-w" target="_blank" rel="noopener">免费版</a>即可，提取码：idvz  )</p>
+<h4 id="2-购买云主机"><a href="#2-购买云主机" class="headerlink" title="2.购买云主机"></a>2.购买云主机</h4><p>此处使用阿里云主机作为示例。</p>
+<p>首先打开<a href="https://account.aliyun.com/login/login.htm" target="_blank" rel="noopener">阿里云官网</a>，注册…登陆…实名制之类的东西，然后打开<a href="https://ecs-buy.aliyun.com/wizard" target="_blank" rel="noopener">购买页面</a> ：</p>
+<p>此处应有图片…. 1</p>
+<p>地域：服务器地区尽量选择离你较近的地域，可以有效降低延迟。</p>
+<p>实例：一定不要因为便宜而选突发性实例，这个规格的云主机每天只有2个多小时是满性能的，其他情况下都是超级卡的状态 ( 显然我是买过的…😭 )</p>
+<p>镜像：选择CentOS 7.6 64位 ( 如果会Linux相关知识，系统可自己选择 )</p>
+<p>存储：默认40G，完全够用了 </p>
+<p>点击下一步，进入网络和安全组配置：</p>
+<p>此处应有图片… 2</p>
+<p>网络：默认</p>
+<p>公网带宽：选择按固定带宽1M ( 多人可以考虑2M，如果用量不大可以选择按量付费，不过不确定一个月的具体流量 )</p>
+<p>安全组：默认</p>
+<p>点击下一步，进入系统配置：</p>
+<p>登录凭证：选择自定义密码，输入登录密码 ( 以后可以在控制台重置密码 )</p>
+<p>其他默认，然后确认订单，付款。</p>
+<p>关于服务器配置的选择，贴一张官网的图：</p>
+<p>此处应有图片…. 3</p>
+<p>意思就是：</p>
+<p>① 一个玩家需要8Kb/s的上传带宽 ( 云主机的宽带通常就是指的上传带宽，这个很容易满足 ) </p>
+<p>② 一个玩家大约需要65M内存 ( 内存是需要重视的问题，通常玩饥荒都会开启两个世界：一个地上，一个地下。因此在计算内存的时候，如果你选择开启两个世界，那么这个数据需要乘上2。而且这个是指不开任何Mod的情况下，如果是大型Mod，内存占用是很可怕的。之前试过一次智能敌对，一个世界的进程能吃1G的内存 )</p>
+<p>③ 不是很清楚它说的CPU是N/A是任意的意思么，可是实际上后期世界中的生物越来越多的情况下，CPU特别容易爆 ( 推荐安装服务器清理Mod )</p>
+<p>④ 需要的环境</p>
+<p>参考 : 我使用的是1核2G2M带宽的服务器 ,一年费用是1000+，在装有服务器清理Mod的情况下，正常6人玩到200多天是没什么问题的，不过在青蛙雨和蜘蛛区的时候还是会很卡。( 吐槽一下：垃圾游戏渣优化，以前弄求生之路服务器的时候，完全不需要考虑内存的问题，饥荒这种贴图游戏实在是太吃内存了…😒 )</p>
+<h4 id="3-配置并连接云主机"><a href="#3-配置并连接云主机" class="headerlink" title="3.配置并连接云主机"></a>3.配置并连接云主机</h4><p>付款后，过一分钟左右就可以在<a href="https://ecs.console.aliyun.com/" target="_blank" rel="noopener">控制台</a>看到云主机了，显示的都是一些基本信息，记录下公网IP地址。然后按照下图进入安全组配置：</p>
+<p>此处应用图片。。。 4</p>
+<p>点击配置规则：( 饥荒服务器默认端口为10999和10998，因此需要开启这两个端口 )</p>
+<p>此处应有图片… 5 </p>
+<p>此处应有图片… 6</p>
+<p>打开Xshell工具，使用快捷键ALT+N新建连接，如下图 ( 也可以点击 -&gt; 文件 -&gt; 新建 )：</p>
+<p>此处应有图片… 7 </p>
+<p>此处应有图片… 8</p>
+<p>点击连接，下面的提示点击确定，进入下面的界面就表示连接成功：</p>
+<p>此处应有图片… 9</p>
+<h4 id="4-下载并安装游戏"><a href="#4-下载并安装游戏" class="headerlink" title="4.下载并安装游戏"></a>4.下载并安装游戏</h4><p>接下来就是操作Linux系统了，下面命令按行敲入窗口中，按回车键执行。</p>
+<p>首先更新yum ( Linux系统中安装软件包的工具 ) : </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum update</span><br><span class="line">yum upgrade -y</span><br></pre></td></tr></table></figure>
+<p>安装游戏运行环境和常用工具</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install glibc.i686 libstdc++.i686 libcurl.i686 vim screen -y</span><br></pre></td></tr></table></figure>
+<p>创建steam用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">useradd steam </span><br><span class="line">su steam</span><br><span class="line">cd ~</span><br><span class="line">mkdir steamcmd</span><br><span class="line">cd steamcmd</span><br></pre></td></tr></table></figure>
+<p>下载并解压Steam的Linux客户端steamcmd</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz</span><br><span class="line">tar -zxvf steamcmd_linux.tar.gz</span><br></pre></td></tr></table></figure>
+<p>启动Steam客户端，并开始下载饥荒 ( 饥荒专用服务器ID为 343050 ) </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./steamcmd.sh +login anonymous +force_install_dir /home/dst +app_update 343050 validate +quit</span><br></pre></td></tr></table></figure>
+<p>下载完毕后 ( 大概十分钟左右 )，先启动一次服务器，验证是否缺失依赖</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /home/steam/dst/bin</span><br><span class="line">~/dst/bin/dontstarve_dedicated_server_nullrenderer -cluster MyDediServer -shard Master</span><br></pre></td></tr></table></figure>
+<p>此时可能会报找不到libcurl-gnutls.so.4，解决方法为将该依赖库复制到饥荒游戏文件夹中：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /usr/lib/libcurl.so.4 ~/dst/bin/lib32/libcurl-gnutls.so.4</span><br></pre></td></tr></table></figure>
+<p>这里可能会有其他依赖包的缺失问题，解决办法即是将依赖复制到饥荒游戏文件夹中。</p>
+<p>正常启动后，按Ctrl+C即可关闭服务器，也可以使用控制台命令c_shutdown()。</p>
+<p>PS：饥荒服务器控制台指令自行百度。</p>
+<h4 id="5-存档配置"><a href="#5-存档配置" class="headerlink" title="5.存档配置"></a>5.存档配置</h4><p>在存档配置之前，我们现在电脑上打开饥荒联机版游戏，进入主界面，点击下面的官网按钮，查看个人ID和个人服务器的token，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">个人ID: KU_uG******</span><br><span class="line">服务器token: pds-g^KU_uGVY9tdU^M***************************Sdsg50g4A6jg=</span><br></pre></td></tr></table></figure>
+<p>此处应有图片… 10 11 12</p>
+<p>饥荒默认存档位置在用户目录中.kiel文件夹中 (  ~/.kiel/DoNotStarveTogether)，由于我们在上面的启动命令中增加了-cluster参数，因此会在该文件夹中自动创建名为MyDediServer的存档文件夹，如果不指定该参数，则会自动生成Cluster_1的文件夹。由于饥荒服务器直接配置文件太过复杂，这里推荐使用存档替换的方式。</p>
+<p>首先在个人电脑上启动游戏，创建一个新世界 ( 此处记住服务器栏位1~5 ) ，自定义自己的世界配置和Mod配置，启动世界后等到选人界面时退出</p>
+<p>此处应有图片… 13</p>
+<p>在游戏首页点击存档图标，进入本地存档目录，按照你刚才的栏位找到名为Cluster_[栏位]的文件夹，即为刚才创建的世界存档，复制当前文档路径，例如：F:\我的文档\Klei\DoNotStarveTogether\Cluster_1</p>
+<p>此处应有图片… 14</p>
+<p>打开Xftp工具，直接点击下图所示图标即可</p>
+<p>此处应有图片… 15</p>
+<p>左边为本地文件目录，右边为远程服务器文件目录</p>
+<p>此处应有图片… 16</p>
+<p>在左边粘贴刚才复制的文档路径，回车进入；右边输入服务器存档目录即 /home/steam/.klei/DoNotStarveTogether/MyDediServer，回车进入</p>
+<p>此处应有图片… 17</p>
+<p>文件对应说明：</p>
+<p>① Master 文件夹为主世界即地面世界存档及配置</p>
+<p>② Caves 文件夹为洞穴世界存档及配置</p>
+<p>③ cluser.ini 文件为服务器信息，世界名称，密码等</p>
+<p>④ cluster_token.txt 为服务器 token</p>
+<p>⑤ Master 和 Caves 中共有的 : </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">backup -&gt; 服务器日志及聊天日志存档</span><br><span class="line">save -&gt;存档文件夹</span><br><span class="line">sever_chat_log.txt -&gt; 服务器此次启动中玩家的聊天内容</span><br><span class="line">server_log.txt -&gt; 服务器日志</span><br><span class="line">server.ini -&gt; 世界的配置信息，端口等</span><br><span class="line">leveldataoverride.lua-&gt;世界配置文件，即为世界详细配置，可以直接对其更改，来完成对世界的自定义</span><br><span class="line">modoverrides.lua -&gt; Mod配置文件，可以对其修改完成服务器Mod配置</span><br></pre></td></tr></table></figure>
+<p>直接选中左侧所有文件及文件夹，拖拽至右侧，选择全部覆盖，等待文件全部传输至服务器即可关闭。然后再次回到Xshell窗口 ( 由于创建steam用户时没有增加密码，因此上传文件时默认使用的是root用户，此时需要先更改文件所有者 ) </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">exit</span><br><span class="line">chown -R steam:steam /home/steam </span><br><span class="line">su steam</span><br></pre></td></tr></table></figure>
+<p>再进入存档文件夹，修改服务器token：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd /home/steam/.klei/DoNotStarveTogether/MyDediServer</span><br><span class="line"><span class="meta">#</span> 编辑cluster_token.txt</span><br><span class="line">vim cluster_token.txt</span><br><span class="line"><span class="meta">#</span> 此时按i进入编辑模式，在文件中输入之前获取的服务器token</span><br><span class="line">pds-g^KU_uGVY9tdU^M***************************Sdsg50g4A6jg=</span><br><span class="line"><span class="meta">#</span> 编辑完成，按ESC，输入:wq 回车，即为保存并退出</span><br></pre></td></tr></table></figure>
+<p>编辑管理员列表 ( 非必须 ) : </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 编辑adminlist.txt管理员列表，输入你想添加的玩家ID（类似于之前获取的个人ID）由于服务器token所有者默认拥有管理员权限，因此不需要添加自己的ID，此处仅做为参考</span><br><span class="line">vim adminlist.txt</span><br><span class="line"><span class="meta">#</span> 输入</span><br><span class="line">KU_uG******</span><br><span class="line"><span class="meta">#</span> 编辑完成，按ESC，输入:wq 回车，即为保存并退出</span><br></pre></td></tr></table></figure>
+<p>编辑黑名单列表 ( 非必须 ) : </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vim blocklist.txt</span><br><span class="line"><span class="meta">#</span> 输入黑名单玩家ID</span><br><span class="line">xxxxxxx</span><br><span class="line"><span class="meta">#</span> 编辑完成，按ESC，输入:wq 回车，即为保存并退出</span><br></pre></td></tr></table></figure>
+<h4 id="6-MOD下载及使用"><a href="#6-MOD下载及使用" class="headerlink" title="6.MOD下载及使用"></a>6.MOD下载及使用</h4><p>Mod的配置文件即为上面所说的modoverrides.lua，使用编辑页面打开：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> &#123;</span><br><span class="line">  [<span class="string">"workshop-1160616621"</span>]=&#123;</span><br><span class="line">    configuration_options=&#123; Language=<span class="string">"def"</span>, Ownership=<span class="literal">true</span>, Travel_Cost=<span class="number">32</span> &#125;,</span><br><span class="line">    enabled=<span class="literal">false</span> </span><br><span class="line">  &#125;,</span><br><span class="line">  [<span class="string">"workshop-1216718131"</span>]=&#123; configuration_options=&#123; clean=<span class="literal">true</span>, lang=<span class="literal">true</span>, stack=<span class="literal">true</span> &#125;, enabled=<span class="literal">true</span> &#125;,</span><br><span class="line">  [<span class="string">"workshop-362175979"</span>]=&#123; configuration_options=&#123; [<span class="string">"Draw over FoW"</span>]=<span class="string">"disabled"</span> &#125;, enabled=<span class="literal">true</span> &#125;,</span><br><span class="line">  [<span class="string">"workshop-378160973"</span>]=&#123;</span><br><span class="line">    configuration_options=&#123;</span><br><span class="line">     ENABLEPINGS=<span class="literal">true</span>,</span><br><span class="line">     FIREOPTIONS=<span class="number">2</span>,</span><br><span class="line">     OVERRIDEMODE=<span class="literal">false</span>,</span><br><span class="line">     SHAREMINIMAPPROGRESS=<span class="literal">true</span>,</span><br><span class="line">     SHOWFIREICONS=<span class="literal">true</span>,</span><br><span class="line">     SHOWPLAYERICONS=<span class="literal">true</span>,</span><br><span class="line">     SHOWPLAYERSOPTIONS=<span class="number">2</span> </span><br><span class="line">    &#125;,</span><br><span class="line">    enabled=<span class="literal">true</span> </span><br><span class="line">  &#125;,</span><br><span class="line">  [<span class="string">"workshop-703758203"</span>]=&#123; configuration_options=&#123;  &#125;, enabled=<span class="literal">true</span> &#125;,</span><br><span class="line">  [<span class="string">"workshop-804317397"</span>]=&#123;</span><br><span class="line">    configuration_options=&#123;</span><br><span class="line">      buffgo=<span class="literal">false</span>,</span><br><span class="line">      fhl_cos=<span class="number">0.05</span>,</span><br><span class="line">      fhl_hjopen=<span class="literal">false</span>,</span><br><span class="line">      likeornot=<span class="literal">false</span>,</span><br><span class="line">      openli=<span class="literal">false</span>,</span><br><span class="line">      openlight=<span class="literal">false</span>,</span><br><span class="line">      zzj_cankanshu=<span class="literal">false</span>,</span><br><span class="line">      zzj_canuseashammer=<span class="literal">false</span>,</span><br><span class="line">      zzj_canuseasshovel=<span class="literal">false</span>,</span><br><span class="line">      zzj_canwakuang=<span class="literal">false</span>,</span><br><span class="line">      zzj_finiteuses=<span class="number">210</span>,</span><br><span class="line">      zzj_fireopen=<span class="literal">false</span>,</span><br><span class="line">      zzj_pre=<span class="number">1</span> </span><br><span class="line">    &#125;,</span><br><span class="line">    enabled=<span class="literal">true</span> </span><br><span class="line">  &#125;,</span><br><span class="line"><span class="comment">--  Show Me</span></span><br><span class="line">  [<span class="string">"workshop-666155465"</span>]=&#123;</span><br><span class="line">    configuration_options=&#123; food_estimation=<span class="number">-1</span>, food_order=<span class="number">0</span>, food_style=<span class="number">0</span>, lang=<span class="string">"chs"</span>, show_food_units=<span class="number">-1</span> &#125;,</span><br><span class="line">    enabled=<span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line"><span class="comment">--  复活</span></span><br><span class="line">  [<span class="string">"workshop-462434129"</span>]=&#123;</span><br><span class="line">    configuration_options=&#123;</span><br><span class="line">      MOD_RESTART_ALLOW_KILL=<span class="literal">false</span>,</span><br><span class="line">      MOD_RESTART_ALLOW_RESTART=<span class="literal">true</span>,</span><br><span class="line">      MOD_RESTART_ALLOW_RESURRECT=<span class="literal">true</span>,</span><br><span class="line">      MOD_RESTART_CD_KILL=<span class="number">100</span>,</span><br><span class="line">      MOD_RESTART_CD_RESTART=<span class="number">100</span>,</span><br><span class="line">      MOD_RESTART_CD_RESURRECT=<span class="number">100</span>,</span><br><span class="line">      MOD_RESTART_FORCE_DROP_MODE=<span class="number">1</span>,</span><br><span class="line">      MOD_RESTART_IGNORING_ADMIN=<span class="literal">true</span>,</span><br><span class="line">      MOD_RESTART_TRIGGER_MODE=<span class="number">1</span>,</span><br><span class="line">      MOD_RESTART_WELCOME_TIPS=<span class="literal">true</span>,</span><br><span class="line">      MOD_RESTART_WELCOME_TIPS_TIME=<span class="number">6</span> </span><br><span class="line">    &#125;,</span><br><span class="line">    enabled=<span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>workshop-[id] 此处ID即为创意工坊中连接的ID，可直接在创意工坊中查看；configuration_options配置选项同游戏中Mod配置相同，由于不清楚具体配置内容，不推荐手动修改。</p>
+<p>那如何下载Mod呢？首先需要编辑文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">vim ~/dst/mods/dedicated_server_mods_setup.lua</span><br><span class="line"><span class="meta">#</span> 在文件中添加如下 : ( 括号中为 Mod 在创意工坊中的 id，内容按照自身服务器所需Mod填写 ) </span><br><span class="line">ServerModSetup("1216718131")</span><br><span class="line">ServerModSetup("375850593")</span><br><span class="line">ServerModSetup("378160973")</span><br><span class="line">ServerModSetup("458587300")</span><br><span class="line">ServerModSetup("703758203")</span><br><span class="line">ServerModSetup("804317397")</span><br><span class="line">ServerModSetup("1699254645")</span><br><span class="line"><span class="meta">#</span> 保存退出</span><br><span class="line"><span class="meta">#</span> PS:此处还可以直接输入Mod合集，即ServerModCollectionSetup("[id]")</span><br></pre></td></tr></table></figure>
+<p>配置过之后，下次启动游戏时就会自动下载Mod并启用。</p>
+<h4 id="7-启动游戏"><a href="#7-启动游戏" class="headerlink" title="7.启动游戏"></a>7.启动游戏</h4><p>可以直接启动 ( 推荐使用脚本 ) : </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd ~/dst/bin</span><br><span class="line"><span class="meta">#</span> 启动地面世界</span><br><span class="line">./dontstarve_dedicated_server_nullrenderer -console -cluster MyDediServer -shard Master</span><br><span class="line"><span class="meta">#</span> 启动洞穴世界</span><br><span class="line">./dontstarve_dedicated_server_nullrenderer -console -cluster MyDediServer -shard Caves</span><br></pre></td></tr></table></figure>
+<p>编写启动脚本：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/dst_script</span><br><span class="line">cd ~/dst_script</span><br><span class="line">touch dst_master.sh</span><br><span class="line">touch dst_caves.sh</span><br><span class="line">chmod a+x dst_master.sh</span><br><span class="line">chmod a+x dst_caves.sh</span><br><span class="line"><span class="meta">#</span> 编辑标本</span><br><span class="line"></span><br><span class="line">vim dst_master.sh</span><br><span class="line"><span class="meta">#</span> 输入</span><br><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line"></span><br><span class="line">cd ~/dst/bin</span><br><span class="line">screen -dmS "dst_overworld" ./dontstarve_dedicated_server_nullrenderer -console -cluster MyDediServer -shard Master</span><br><span class="line"><span class="meta">#</span> 保存退出</span><br><span class="line"></span><br><span class="line">vim dst_caves.sh</span><br><span class="line"><span class="meta">#</span> 输入</span><br><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line"></span><br><span class="line">cd ~/dst/bin</span><br><span class="line">screen -dmS "dst_caves" ./dontstarve_dedicated_server_nullrenderer -console -cluster MyDediServer -shard Caves</span><br><span class="line"><span class="meta">#</span> 保存退出</span><br></pre></td></tr></table></figure>
+<p>使用 <a href="https://www.cnblogs.com/lpfuture/p/5786843.html" target="_blank" rel="noopener">screen</a> -dmS 命令启动进程时，不会显示对应的控制台。如果需要使用控制台，则需要使用</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 恢复到地面世界进程</span><br><span class="line">screen -r dst_overworld</span><br><span class="line"><span class="meta">#</span> 隐藏控制台按下Ctrl+A然后按下Ctrl+D即可</span><br><span class="line"><span class="meta">#</span> 恢复到洞穴世界进程</span><br><span class="line">screen -r dst_caves</span><br><span class="line"><span class="meta">#</span> 隐藏控制台按下Ctrl+A然后按下Ctrl+D即可</span><br></pre></td></tr></table></figure>
+<p>启动游戏，运行脚本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./dst_master.sh</span><br><span class="line">./dst_caves.sh</span><br></pre></td></tr></table></figure>
+<p>等服务器启动后，即可在大厅搜索到对应服务器。</p>
+<h4 id="8-关于更新"><a href="#8-关于更新" class="headerlink" title="8.关于更新"></a>8.关于更新</h4><p>编写更新脚本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">touch ~/dst_script/update.sh</span><br><span class="line">chmod a+x ~/dst_script/update.sh</span><br><span class="line">vim ~/dst_script/update.sh</span><br></pre></td></tr></table></figure>
+<p>输入</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>更新游戏</span><br><span class="line">~/steamcmd/steamcmd.sh +login anonymous +force_install_dir /home/steam/dst +app_update 343050 validate +quit</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>更新mod</span><br><span class="line">cd /home/steam/dst/bin</span><br><span class="line">~/dst/bin/dontstarve_dedicated_server_nullrenderer -only_update_server_mods</span><br></pre></td></tr></table></figure>
+<p>执行时需要关闭服务器。</p>
+<p>饥荒的游戏存档位置默认为 ~/.kiel/DoNotStarveTogether/中，上面我们启动命令中指定了-cluster的参数，游戏就会再上述文件夹中创建一个名为MyDediServer的文件夹，若不指定该参数，默认创建Cluster_1。</p>
+
+        </div>
+        
+          
+
+
+  <section class="meta" id="footer-meta">
+    <hr>
+    <div class="new-meta-box">
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-05-16T11:28:57+08:00">
+  <a class="notlink">
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>最后更新于 2019年5月16日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Linux/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>Linux</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/饥荒/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>饥荒</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/专用服务器/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>专用服务器</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Shell/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>Shell</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/阿里云/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>阿里云</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+            <div class="prev-next">
+                
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h4>
+                                <a href="/2019/01/21/生成Excel和CSV的工具类/" rel="prev" title="生成Excel和CSV的工具类">
+                                    
+                                        生成Excel和CSV的工具类
+                                    
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/Java/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>Java</a> <a class="tag" href="/tags/工具类/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>工具类</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+            </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments">
+    <section class="article typo">
+      <h4><i class="fas fa-comments fa-fw" aria-hidden="true"></i>&nbsp;评论</h4>
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-spinner fa-spin fa-fw"></i>
+          </div>
+        </section>
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'Linux系统下搭建饥荒专用服务器（阿里云主机）',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class="l_side">
+  
+    
+    
+      
+        
+          
+          
+            <section class="widget author">
+  <div class="content material">
+    
+      <div class="avatar">
+        <img class="avatar" src="https://img.vim-cn.com/a0/c8b973bbbc1fbe0830d5a0ead35df99be81219.png">
+      </div>
+    
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="https://steamcommunity.com/id/rabiribizhendexiaotuzi/" class="social fab fa-steam flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:baiyukai.i@outlook.com" class="social fas fa-envelope flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/BayMinGitHub" class="social fab fa-github-alt flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://twitter.com/BayMin11" class="social fab fa-twitter flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+          
+        
+      
+        
+          
+          
+            
+  <section class="widget toc-wrapper">
+    
+<header class="material">
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  
+    <div class="wrapper"><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+  
+</header>
+
+    <div class="content material">
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-准备"><span class="toc-text">1.准备</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-购买云主机"><span class="toc-text">2.购买云主机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-配置并连接云主机"><span class="toc-text">3.配置并连接云主机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-下载并安装游戏"><span class="toc-text">4.下载并安装游戏</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-存档配置"><span class="toc-text">5.存档配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-MOD下载及使用"><span class="toc-text">6.MOD下载及使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-启动游戏"><span class="toc-text">7.启动游戏</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-关于更新"><span class="toc-text">8.关于更新</span></a></li></ol>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+  <section class="widget category">
+    
+<header class="material">
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
+  
+    <a class="rightBtn" rel="nofollow" href="/categories/" title="categories/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class="content material">
+      <ul class="entry">
+        
+          <li><a class="flat-box" title="/categories/Greenplum/" href="/categories/Greenplum/"><div class="name">Greenplum</div><div class="badge">(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/Java/" href="/categories/Java/"><div class="name">Java</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/游戏服务器/" href="/categories/游戏服务器/"><div class="name">游戏服务器</div><div class="badge">(1)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+  <section class="widget tagcloud">
+    
+<header class="material">
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
+  
+    <a class="rightBtn" rel="nofollow" href="/tags/" title="tags/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class="content material">
+      <a href="/tags/Greenplum/" style="font-size: 24px; color: #555">Greenplum</a> <a href="/tags/Java/" style="font-size: 14px; color: #999">Java</a> <a href="/tags/Linux/" style="font-size: 14px; color: #999">Linux</a> <a href="/tags/Shell/" style="font-size: 14px; color: #999">Shell</a> <a href="/tags/专用服务器/" style="font-size: 14px; color: #999">专用服务器</a> <a href="/tags/工具类/" style="font-size: 14px; color: #999">工具类</a> <a href="/tags/数据库/" style="font-size: 24px; color: #555">数据库</a> <a href="/tags/数据迁移/" style="font-size: 14px; color: #999">数据迁移</a> <a href="/tags/阿里云/" style="font-size: 14px; color: #999">阿里云</a> <a href="/tags/饥荒/" style="font-size: 14px; color: #999">饥荒</a>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+
+
+  <section class="widget music">
+    
+<header class="material">
+  <div><i class="fas fa-compact-disc fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;播放列表</div>
+  
+    <a class="rightBtn" rel="external nofollow noopener noreferrer" target="_blank" href="https://music.163.com/#/user/home?id=122081486" title="https://music.163.com/#/user/home?id=122081486">
+    <i class="far fa-heart fa-fw"></i></a>
+  
+</header>
+
+    <div class="content material">
+      
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.css">
+  <div class="aplayer" data-theme="#FAFAFA" data-mode="circulation" data-server="netease" data-type="playlist" data-id="151902279" data-volume="0.7">
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
+
+
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            <section class="widget grid">
+  
+<header class="material">
+  <div><i class="fas fa-map-signs fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;站内导航</div>
+  
+</header>
+
+  <div class="content material">
+    <ul class="grid navgation">
+      
+        <li><a class="flat-box" title="/" href="/" id="home">
+          
+            <i class="fas fa-clock fa-fw" aria-hidden="true"></i>
+          
+          近期文章
+        </a></li>
+      
+        <li><a class="flat-box" title="/archives/" href="/archives/" rel="nofollow" id="archives">
+          
+            <i class="fas fa-archive fa-fw" aria-hidden="true"></i>
+          
+          文章归档
+        </a></li>
+      
+        <li><a class="flat-box" title="/friends/" href="/friends/" rel="nofollow" id="friends">
+          
+            <i class="fas fa-link fa-fw" aria-hidden="true"></i>
+          
+          我的友链
+        </a></li>
+      
+        <li><a class="flat-box" title="/about/" href="/about/" rel="nofollow" id="about">
+          
+            <i class="fas fa-info-circle fa-fw" aria-hidden="true"></i>
+          
+          关于小站
+        </a></li>
+      
+    </ul>
+  </div>
+</section>
+
+          
+        
+      
+    
+
+  
+</aside>
+
+<footer id="footer" class="clearfix">
+  
+  
+    <div class="social-wrapper">
+      
+        
+          <a href="https://steamcommunity.com/id/rabiribizhendexiaotuzi/" class="social fab fa-steam flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="mailto:baiyukai.i@outlook.com" class="social fas fa-envelope flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="https://github.com/BayMinGitHub" class="social fab fa-github-alt flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="https://twitter.com/BayMin11" class="social fab fa-twitter flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+    </div>
+  
+  <br>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+  <div>
+    本站使用
+    <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
+    作为主题
+    
+      ，
+      总访问量为
+      <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
+      次
+    
+    。
+  </div>
+</footer>
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
+
+
+  <script async src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      const $reveal = $('.reveal');
+      if ($reveal.length === 0) return;
+      const sr = ScrollReveal({ distance: 0 });
+      sr.reveal('.reveal');
+    });
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/av-min.js"></script>
+  
+    
+      <script src="/js/volantis.js"></script>
+    
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var notify = 'false' == true;
+  var verify = 'false' == true;
+  var valine = new Valine();
+  valine.init({
+    el: '#valine_container',
+    notify: notify,
+    verify: verify,
+    guest_info: guest_info,
+    
+    appId: "W4rdjcbtNTwN4vQSBRpgeCwo-gzGzoHsz",
+    appKey: "UKgl0FCED9JmgK1LQq3TETNw",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'mp',
+    lang:'zh-cn',
+    highlight:'false'
+  })
+  </script>
+
+
+
+  <script src="/js/app.js"></script>
+
+
+  <script src="/js/search.js"></script>
+
+
+
+
+<!-- 复制 -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      clipboard.on('success', function(e) {
+        //您可以加入成功提示
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        success_prompt(COPY_SUCCESS);
+        e.clearSelection();
+      });
+      clipboard.on('error', function(e) {
+        //您可以加入失败提示
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+        fail_prompt(COPY_FAILURE);
+      });
+    }
+    initCopyCode();
+
+  }(window, document);
+
+  /**
+   * 弹出式提示框，默认1.5秒自动消失
+   * @param message 提示信息
+   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+   * @param time 消失时间
+   */
+  var prompt = function (message, style, time)
+  {
+      style = (style === undefined) ? 'alert-success' : style;
+      time = (time === undefined) ? 1500 : time*1000;
+      $('<div>')
+          .appendTo('body')
+          .addClass('alert ' + style)
+          .html(message)
+          .show()
+          .delay(time)
+          .fadeOut();
+  };
+
+  // 成功提示
+  var success_prompt = function(message, time)
+  {
+      prompt(message, 'alert-success', time);
+  };
+
+  // 失败提示
+  var fail_prompt = function(message, time)
+  {
+      prompt(message, 'alert-danger', time);
+  };
+
+  // 提醒
+  var warning_prompt = function(message, time)
+  {
+      prompt(message, 'alert-warning', time);
+  };
+
+  // 信息提示
+  var info_prompt = function(message, time)
+  {
+      prompt(message, 'alert-info', time);
+  };
+
+</script>
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+
+</html>
+<!--动态线条背景-->
+<!-- <script type="text/javascript" color="201,131,75" opacity='0.7' zIndex="-2" count="200"
+  src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+  </script> -->

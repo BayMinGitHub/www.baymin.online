@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>兔子的个人小站</title>
+  <title>Greenplum查看数据库和表所占磁盘大小 | 兔子的个人小站</title>
   
   <meta name="keywords" content="博客，游戏分享，个人日志">
   
   
-  <meta name="description" content="博客,游戏">
+  <meta name="description" content="数据库, 博客,游戏">
   
 
   
@@ -187,33 +187,221 @@
 
   <div class="l_body nocover">
     <div class='body-wrapper'>
-      
-<div class="l_main">
+      <div class="l_main">
   
-    <section class="post-list">
+
+  
+    <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
       
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/2018/12/05/Greenplum查看数据库和表所占磁盘大小/">
+        Greenplum查看数据库和表所占磁盘大小
+      </a>
+    </h1>
+  
+
+
+      
+      <div class="new-meta-box">
         
           
         
           
-        
+            
+  <div class="new-meta-item author">
+    <a href="https://39.97.115.194" rel="nofollow">
+      
+        <img src="https://39.97.115.194/img/index_logo.png">
+      
+      <p>BayMin</p>
+    </a>
+  </div>
+
+
           
         
           
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2018-12-05</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item category">
+    <a href="/categories/Greenplum/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>Greenplum</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class="notlink">
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          <p>查看数据库所占磁盘大小的几条命令。</p>
+<a id="more"></a>
+<p>表的大小 : </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> pg_size_pretty(pg_relation_size(<span class="string">'gp_test'</span>));</span><br><span class="line"> pg_size_pretty </span><br><span class="line"><span class="comment">----------------</span></span><br><span class="line"> 1761 MB</span><br><span class="line">(1 row)</span><br></pre></td></tr></table></figure>
+<p>表和索引的大小 : </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> pg_size_pretty(pg_total_relation_size(<span class="string">'gp_test'</span>));</span><br><span class="line"> pg_size_pretty </span><br><span class="line"><span class="comment">----------------</span></span><br><span class="line"> 2186 MB</span><br><span class="line">(1 row)</span><br></pre></td></tr></table></figure>
+<p>查看指定数据库大小 : </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> pg_size_pretty(pg_database_size(<span class="string">'zwcdb'</span>));</span><br><span class="line"> pg_size_pretty </span><br><span class="line"><span class="comment">----------------</span></span><br><span class="line"> 2241 MB</span><br><span class="line">(1 row)</span><br></pre></td></tr></table></figure>
+<p>查看所有数据库的大小 : </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> datname,pg_size_pretty(pg_database_size(datname)) <span class="keyword">from</span> pg_database;</span><br><span class="line">  datname  | pg_size_pretty </span><br><span class="line"><span class="comment">-----------+----------------</span></span><br><span class="line"> zwcdb     | 2241 MB</span><br><span class="line"> postgres  | 47 MB</span><br><span class="line"> template1 | 47 MB</span><br><span class="line"> template0 | 45 MB</span><br><span class="line"> gpperfmon | 67 MB</span><br><span class="line">(5 rows)</span><br></pre></td></tr></table></figure>
+<p>查看数据分布情况和磁盘空间 : </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> gp_segment_id,<span class="keyword">count</span>(*) <span class="keyword">from</span> gp_test <span class="keyword">group</span> <span class="keyword">by</span> gp_segment_id <span class="keyword">order</span> <span class="keyword">by</span> <span class="number">1</span>;</span><br><span class="line"> gp_segment_id |  count  </span><br><span class="line"><span class="comment">---------------+---------</span></span><br><span class="line">             0 | 5000000</span><br><span class="line">             1 | 4999999</span><br><span class="line">             2 | 5000001</span><br><span class="line">             3 | 5000000</span><br><span class="line">(4 rows)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">select</span> dfhostname, dfspace,dfdevice <span class="keyword">from</span> gp_toolkit.gp_disk_free <span class="keyword">order</span> <span class="keyword">by</span> dfhostname;</span><br><span class="line"> dfhostname | dfspace  |  dfdevice  </span><br><span class="line"><span class="comment">------------+----------+------------</span></span><br><span class="line">  sdw1      | 12273372 |  /dev/sdb1</span><br><span class="line">  sdw1      | 12273372 |  /dev/sdb1</span><br><span class="line">  sdw2      | 12273404 |  /dev/sdb1</span><br><span class="line">  sdw2      | 12273404 |  /dev/sdb1</span><br></pre></td></tr></table></figure>
+        </div>
+        
+          
+
+
+  <section class="meta" id="footer-meta">
+    <hr>
+    <div class="new-meta-box">
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-05-15T15:53:00+08:00">
+  <a class="notlink">
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>最后更新于 2019年5月15日</p>
+  </a>
+</div>
+
         
       
-      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Greenplum/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>Greenplum</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/数据库/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>数据库</p></a></div>
+
+
         
       
         
-      
+          
+
         
       
+    </div>
+  </section>
+
+
         
+        
+            <div class="prev-next">
+                
+                    <section class="prev">
+                        <span class="art-item-left">
+                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
+                            <h4>
+                                <a href="/2018/12/12/Greenplum数据库迁移/" rel="prev" title="Greenplum数据库迁移">
+                                  
+                                      Greenplum数据库迁移
+                                  
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/Greenplum/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>Greenplum</a> <a class="tag" href="/tags/数据库/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>数据库</a> <a class="tag" href="/tags/数据迁移/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>数据迁移</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+                
+            </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments">
+    <section class="article typo">
+      <h4><i class="fas fa-comments fa-fw" aria-hidden="true"></i>&nbsp;评论</h4>
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-spinner fa-spin fa-fw"></i>
+          </div>
+        </section>
       
     </section>
-    
+  </article>
+
+
   
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'Greenplum查看数据库和表所占磁盘大小',
+      tools: true
+    }
+  </script>
+
+
 </div>
 <aside class="l_side">
   
@@ -516,6 +704,36 @@
 
 
 
+
+  <script src="/js/av-min.js"></script>
+  
+    
+      <script src="/js/volantis.js"></script>
+    
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var notify = 'false' == true;
+  var verify = 'false' == true;
+  var valine = new Valine();
+  valine.init({
+    el: '#valine_container',
+    notify: notify,
+    verify: verify,
+    guest_info: guest_info,
+    
+    appId: "W4rdjcbtNTwN4vQSBRpgeCwo-gzGzoHsz",
+    appKey: "UKgl0FCED9JmgK1LQq3TETNw",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'mp',
+    lang:'zh-cn',
+    highlight:'false'
+  })
+  </script>
 
 
 
