@@ -293,13 +293,15 @@
 <p>③ SSH连接工具 ( 推荐Xshell,<a href="https://pan.baidu.com/s/1qe4Kz3Jj2xu-f2ct0YLA-w" target="_blank" rel="noopener">免费版</a>即可，提取码：idvz  )</p>
 <h4 id="2-购买云主机"><a href="#2-购买云主机" class="headerlink" title="2.购买云主机"></a>2.购买云主机</h4><p>此处使用阿里云主机作为示例。</p>
 <p>首先打开<a href="https://account.aliyun.com/login/login.htm" target="_blank" rel="noopener">阿里云官网</a>，注册…登陆…实名制之类的东西，然后打开<a href="https://ecs-buy.aliyun.com/wizard" target="_blank" rel="noopener">购买页面</a> ：</p>
-<p>此处应有图片…. 1</p>
+<fancybox><img src="https://img.vim-cn.com/f1/872455c7f86992cc8d57ac9aafa43d6e509c59.png" alt="img"></fancybox>
+
 <p>地域：服务器地区尽量选择离你较近的地域，可以有效降低延迟。</p>
 <p>实例：一定不要因为便宜而选突发性实例，这个规格的云主机每天只有2个多小时是满性能的，其他情况下都是超级卡的状态 ( 显然我是买过的…😭 )</p>
 <p>镜像：选择CentOS 7.6 64位 ( 如果会Linux相关知识，系统可自己选择 )</p>
 <p>存储：默认40G，完全够用了 </p>
 <p>点击下一步，进入网络和安全组配置：</p>
-<p>此处应有图片… 2</p>
+<fancybox><img src="https://img.vim-cn.com/98/441b1a8bbd1d81a546171130aa158bec055561.png" alt="img"></fancybox>
+
 <p>网络：默认</p>
 <p>公网带宽：选择按固定带宽1M ( 多人可以考虑2M，如果用量不大可以选择按量付费，不过不确定一个月的具体流量 )</p>
 <p>安全组：默认</p>
@@ -307,7 +309,8 @@
 <p>登录凭证：选择自定义密码，输入登录密码 ( 以后可以在控制台重置密码 )</p>
 <p>其他默认，然后确认订单，付款。</p>
 <p>关于服务器配置的选择，贴一张官网的图：</p>
-<p>此处应有图片…. 3</p>
+<fancybox><img src="https://img.vim-cn.com/29/a06c7772c78dc35b6669c65941e218585b63b3.png" alt="img"></fancybox>
+
 <p>意思就是：</p>
 <p>① 一个玩家需要8Kb/s的上传带宽 ( 云主机的宽带通常就是指的上传带宽，这个很容易满足 ) </p>
 <p>② 一个玩家大约需要65M内存 ( 内存是需要重视的问题，通常玩饥荒都会开启两个世界：一个地上，一个地下。因此在计算内存的时候，如果你选择开启两个世界，那么这个数据需要乘上2。而且这个是指不开任何Mod的情况下，如果是大型Mod，内存占用是很可怕的。之前试过一次智能敌对，一个世界的进程能吃1G的内存 )</p>
@@ -315,15 +318,17 @@
 <p>④ 需要的环境</p>
 <p>参考 : 我使用的是1核2G2M带宽的服务器 ,一年费用是1000+，在装有服务器清理Mod的情况下，正常6人玩到200多天是没什么问题的，不过在青蛙雨和蜘蛛区的时候还是会很卡。( 吐槽一下：垃圾游戏渣优化，以前弄求生之路服务器的时候，完全不需要考虑内存的问题，饥荒这种贴图游戏实在是太吃内存了…😒 )</p>
 <h4 id="3-配置并连接云主机"><a href="#3-配置并连接云主机" class="headerlink" title="3.配置并连接云主机"></a>3.配置并连接云主机</h4><p>付款后，过一分钟左右就可以在<a href="https://ecs.console.aliyun.com/" target="_blank" rel="noopener">控制台</a>看到云主机了，显示的都是一些基本信息，记录下公网IP地址。然后按照下图进入安全组配置：</p>
-<p>此处应用图片。。。 4</p>
+<fancybox><img src="https://img.vim-cn.com/d0/bb4e31c8924204c77b82fbdf69b9121bedc775.png" alt="img"></fancybox>
+
 <p>点击配置规则：( 饥荒服务器默认端口为10999和10998，因此需要开启这两个端口 )</p>
-<p>此处应有图片… 5 </p>
-<p>此处应有图片… 6</p>
+<fancybox><br><img src="https://img.vim-cn.com/9a/7b59e0b06cc9a572f35d40177cbea3b63adab1.png" alt="img"><br><img src="https://img.vim-cn.com/7d/20451fd721dca452462365f0f2daa09ff7757d.png" alt="img"></fancybox>
+
 <p>打开Xshell工具，使用快捷键ALT+N新建连接，如下图 ( 也可以点击 -&gt; 文件 -&gt; 新建 )：</p>
-<p>此处应有图片… 7 </p>
-<p>此处应有图片… 8</p>
+<fancybox><br><img src="https://img.vim-cn.com/b9/3e9df6af25dc2eec6ff0bce49280661343c25b.png" alt="img"><br><img src="https://img.vim-cn.com/83/ba9cd588caa58849076125c9c6fd31fcfe4a3c.png" alt="img"><br></fancybox>
+
 <p>点击连接，下面的提示点击确定，进入下面的界面就表示连接成功：</p>
-<p>此处应有图片… 9</p>
+<fancybox><img src="https://img.vim-cn.com/2f/6a8edd64d1115bafbb1c91e0f2a9cc9810e682.png" alt="img"></fancybox>
+
 <h4 id="4-下载并安装游戏"><a href="#4-下载并安装游戏" class="headerlink" title="4.下载并安装游戏"></a>4.下载并安装游戏</h4><p>接下来就是操作Linux系统了，下面命令按行敲入窗口中，按回车键执行。</p>
 <p>首先更新yum ( Linux系统中安装软件包的工具 ) : </p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum update</span><br><span class="line">yum upgrade -y</span><br></pre></td></tr></table></figure>
@@ -342,28 +347,26 @@
 <p>这里可能会有其他依赖包的缺失问题，解决办法即是将依赖复制到饥荒游戏文件夹中。</p>
 <p>正常启动后，按Ctrl+C即可关闭服务器，也可以使用控制台命令c_shutdown()。</p>
 <p>PS：饥荒服务器控制台指令自行百度。</p>
-<h4 id="5-存档配置"><a href="#5-存档配置" class="headerlink" title="5.存档配置"></a>5.存档配置</h4><p>在存档配置之前，我们现在电脑上打开饥荒联机版游戏，进入主界面，点击下面的官网按钮，查看个人ID和个人服务器的token，如下：</p>
+<h4 id="5-存档配置"><a href="#5-存档配置" class="headerlink" title="5.存档配置"></a>5.存档配置</h4><p>在存档配置之前，我们现在电脑上打开饥荒联机版游戏，进入主界面，点击下面的账号按钮，查看个人ID和个人服务器的token，如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">个人ID: KU_uG******</span><br><span class="line">服务器token: pds-g^KU_uGVY9tdU^M***************************Sdsg50g4A6jg=</span><br></pre></td></tr></table></figure>
-<p>此处应有图片… 10 11 12</p>
-<p>饥荒默认存档位置在用户目录中.kiel文件夹中 (  ~/.kiel/DoNotStarveTogether)，由于我们在上面的启动命令中增加了-cluster参数，因此会在该文件夹中自动创建名为MyDediServer的存档文件夹，如果不指定该参数，则会自动生成Cluster_1的文件夹。由于饥荒服务器直接配置文件太过复杂，这里推荐使用存档替换的方式。</p>
-<p>首先在个人电脑上启动游戏，创建一个新世界 ( 此处记住服务器栏位1~5 ) ，自定义自己的世界配置和Mod配置，启动世界后等到选人界面时退出</p>
-<p>此处应有图片… 13</p>
-<p>在游戏首页点击存档图标，进入本地存档目录，按照你刚才的栏位找到名为Cluster_[栏位]的文件夹，即为刚才创建的世界存档，复制当前文档路径，例如：F:\我的文档\Klei\DoNotStarveTogether\Cluster_1</p>
-<p>此处应有图片… 14</p>
-<p>打开Xftp工具，直接点击下图所示图标即可</p>
-<p>此处应有图片… 15</p>
-<p>左边为本地文件目录，右边为远程服务器文件目录</p>
-<p>此处应有图片… 16</p>
-<p>在左边粘贴刚才复制的文档路径，回车进入；右边输入服务器存档目录即 /home/steam/.klei/DoNotStarveTogether/MyDediServer，回车进入</p>
-<p>此处应有图片… 17</p>
-<p>文件对应说明：</p>
-<p>① Master 文件夹为主世界即地面世界存档及配置</p>
-<p>② Caves 文件夹为洞穴世界存档及配置</p>
-<p>③ cluser.ini 文件为服务器信息，世界名称，密码等</p>
-<p>④ cluster_token.txt 为服务器 token</p>
-<p>⑤ Master 和 Caves 中共有的 : </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">backup -&gt; 服务器日志及聊天日志存档</span><br><span class="line">save -&gt;存档文件夹</span><br><span class="line">sever_chat_log.txt -&gt; 服务器此次启动中玩家的聊天内容</span><br><span class="line">server_log.txt -&gt; 服务器日志</span><br><span class="line">server.ini -&gt; 世界的配置信息，端口等</span><br><span class="line">leveldataoverride.lua-&gt;世界配置文件，即为世界详细配置，可以直接对其更改，来完成对世界的自定义</span><br><span class="line">modoverrides.lua -&gt; Mod配置文件，可以对其修改完成服务器Mod配置</span><br></pre></td></tr></table></figure>
-<p>直接选中左侧所有文件及文件夹，拖拽至右侧，选择全部覆盖，等待文件全部传输至服务器即可关闭。然后再次回到Xshell窗口 ( 由于创建steam用户时没有增加密码，因此上传文件时默认使用的是root用户，此时需要先更改文件所有者 ) </p>
+<fancybox><br><img src="https://img.vim-cn.com/39/58733facfe9850254d7c072adb627aef33b324.png" alt="img"><br><img src="https://img.vim-cn.com/83/4c7bcbd4b6d2b6219d02c0f56387a1a82659c9.png" alt="img"><br><img src="https://img.vim-cn.com/8e/25ea80658cff428193d4761bf92b3dd463b667.png" alt="img"><br><img src="https://img.vim-cn.com/27/8bde80063c23ced7afe7eb34adc5caf60ccc5d.png" alt="img"><br></fancybox>
+
+<p>饥荒默认存档位置在用户目录中.kiel文件夹中 (  ~/.kiel/DoNotStarveTogether)，由于我们在上面的启动命令中增加了-cluster参数，因此会在该文件夹中自动创建名为MyDediServer的存档文件夹，如果不指定该参数，则会自动生成Cluster_1的文件夹。</p>
+<p>由于饥荒服务器直接配置文件太过复杂，这里推荐使用存档替换的方式：</p>
+<p>① 首先在个人电脑上启动游戏，创建一个新世界 ( 此处记住服务器栏位1~5 ) </p>
+<p>② 自定义自己的世界配置和Mod配置，启动世界后等到选人界面时退出</p>
+<p>③ 在游戏首页点击数据图标，进入本地存档目录，按照你刚才的栏位找到名为Cluster_[栏位]的文件夹，即为刚才创建的世界存档，复制当前文档路径，例如：F:\我的文档\Klei\DoNotStarveTogether\Cluster_1</p>
+<fancybox><img src="https://img.vim-cn.com/8c/6efeeb6d86b115971f7e8409403cdddd72fb53.png" alt="img"></fancybox>
+
+<p>④ 打开Xftp工具，直接点击下图所示图标即可</p>
+<fancybox><img src="https://img.vim-cn.com/5f/33926626925feb83e503919bf2e7643c878490.png" alt="img"></fancybox>
+
+<p>⑤ 左边为本地文件目录，右边为远程服务器文件目录</p>
+<p>⑥ 在左边粘贴刚才复制的文档路径，回车进入；右边输入服务器存档目录即 /home/steam/.klei/DoNotStarveTogether/MyDediServer，回车进入</p>
+<fancybox><img src="https://img.vim-cn.com/f5/9a777ccbf960b07aeafced1e89fee52121eaf7.png" alt="img"></fancybox>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">文件对应说明：</span><br><span class="line">Master 文件夹为主世界即地面世界存档及配置</span><br><span class="line">Caves 文件夹为洞穴世界存档及配置</span><br><span class="line">cluser.ini 文件为服务器信息，世界名称，密码等</span><br><span class="line">cluster_token.txt 为服务器 token</span><br><span class="line">Master和Caves中共有的：</span><br><span class="line">	backup -&gt; 服务器日志及聊天日志存档</span><br><span class="line">	save -&gt;存档文件夹</span><br><span class="line">	sever_chat_log.txt -&gt; 服务器此次启动中玩家的聊天内容</span><br><span class="line">	server_log.txt -&gt; 服务器日志</span><br><span class="line">	server.ini -&gt; 世界的配置信息，端口等</span><br><span class="line">	leveldataoverride.lua-&gt;世界配置文件，即为世界详细配置，可以直接对其更改</span><br><span class="line">	modoverrides.lua -&gt; Mod配置文件，可以对其修改完成服务器Mod配置</span><br></pre></td></tr></table></figure>
+<p>直接选中左侧所有文件及文件夹，拖拽至右侧，选择全部覆盖，等待文件全部传输至服务器即可关闭。然后再次回到Xshell窗口 ( 由于创建steam用户时没有添加密码，因此上传文件时默认使用的是root用户，此时需要先更改文件所有者 ) </p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">exit</span><br><span class="line">chown -R steam:steam /home/steam </span><br><span class="line">su steam</span><br></pre></td></tr></table></figure>
 <p>再进入存档文件夹，修改服务器token：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd /home/steam/.klei/DoNotStarveTogether/MyDediServer</span><br><span class="line"><span class="meta">#</span> 编辑cluster_token.txt</span><br><span class="line">vim cluster_token.txt</span><br><span class="line"><span class="meta">#</span> 此时按i进入编辑模式，在文件中输入之前获取的服务器token</span><br><span class="line">pds-g^KU_uGVY9tdU^M***************************Sdsg50g4A6jg=</span><br><span class="line"><span class="meta">#</span> 编辑完成，按ESC，输入:wq 回车，即为保存并退出</span><br></pre></td></tr></table></figure>
@@ -391,7 +394,9 @@
 <p>输入</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>更新游戏</span><br><span class="line">~/steamcmd/steamcmd.sh +login anonymous +force_install_dir /home/steam/dst +app_update 343050 validate +quit</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>更新mod</span><br><span class="line">cd /home/steam/dst/bin</span><br><span class="line">~/dst/bin/dontstarve_dedicated_server_nullrenderer -only_update_server_mods</span><br></pre></td></tr></table></figure>
 <p>执行时需要关闭服务器。</p>
-<p>饥荒的游戏存档位置默认为 ~/.kiel/DoNotStarveTogether/中，上面我们启动命令中指定了-cluster的参数，游戏就会再上述文件夹中创建一个名为MyDediServer的文件夹，若不指定该参数，默认创建Cluster_1。</p>
+<h4 id="常用的服务器指令"><a href="#常用的服务器指令" class="headerlink" title="常用的服务器指令"></a>常用的服务器指令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Kick(userid)--踢出用户ID为“userid”的玩家 </span><br><span class="line">Ban(userid)--禁止用户ID为“userid”的玩家加入 </span><br><span class="line">c_save()--立即保存当前世界（一般会在每天早上自动保存）</span><br><span class="line">c_reset(true|false)--true删除当前世界并新建一个全新的世界；false重新加载当前世界。 </span><br><span class="line">c_shutdown(true|false)--true保存并关闭当前世界；false不保存直接关闭当前世界</span><br><span class="line">SetAllowIncomingConnections(true|false)--true允许他人加入；false阻止任何人加入。 </span><br><span class="line">c_regenerateworld() 重新生成世界</span><br><span class="line">c_testruins() 测试模式 </span><br><span class="line">c_supergodmode() 超级上帝模式 </span><br><span class="line">c_announce() 服务器消息</span><br></pre></td></tr></table></figure>
+<h4 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h4><p>① 饥荒Wiki : <a href="https://dontstarve.fandom.com/zh/wiki/%E5%A4%9A%E4%BA%BA%E7%89%88%E9%A5%91%E8%8D%92%E7%8D%A8%E7%AB%8B%E4%BC%BA%E6%9C%8D%E5%99%A8" target="_blank" rel="noopener">多人版饥荒独立服务器</a></p>
+<p>② lpfuture的博客 : <a href="https://www.cnblogs.com/lpfuture/p/5786843.html" target="_blank" rel="noopener">linux screen工具</a></p>
 
         </div>
         
@@ -403,7 +408,7 @@
     <div class="new-meta-box">
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-05-16T11:28:57+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-05-16T12:53:55+08:00">
   <a class="notlink">
     <i class="fas fa-clock" aria-hidden="true"></i>
     <p>最后更新于 2019年5月16日</p>
@@ -560,7 +565,7 @@
 </header>
 
     <div class="content material">
-      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-准备"><span class="toc-text">1.准备</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-购买云主机"><span class="toc-text">2.购买云主机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-配置并连接云主机"><span class="toc-text">3.配置并连接云主机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-下载并安装游戏"><span class="toc-text">4.下载并安装游戏</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-存档配置"><span class="toc-text">5.存档配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-MOD下载及使用"><span class="toc-text">6.MOD下载及使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-启动游戏"><span class="toc-text">7.启动游戏</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-关于更新"><span class="toc-text">8.关于更新</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-准备"><span class="toc-text">1.准备</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-购买云主机"><span class="toc-text">2.购买云主机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-配置并连接云主机"><span class="toc-text">3.配置并连接云主机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-下载并安装游戏"><span class="toc-text">4.下载并安装游戏</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-存档配置"><span class="toc-text">5.存档配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-MOD下载及使用"><span class="toc-text">6.MOD下载及使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-启动游戏"><span class="toc-text">7.启动游戏</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-关于更新"><span class="toc-text">8.关于更新</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常用的服务器指令"><span class="toc-text">常用的服务器指令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考文档"><span class="toc-text">参考文档</span></a></li></ol>
     </div>
   </section>
 
