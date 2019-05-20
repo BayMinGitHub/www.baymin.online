@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>在Linux系统下搭建求生之路2专用服务器（阿里云主机） | 兔子的个人小站</title>
+  
+  <meta name="keywords" content="博客，游戏分享，个人日志">
+  
+  
+  <meta name="description" content="在Linux系统下搭建求生之路2专用服务器, 博客,游戏">
+  
+
+  
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+  
+  <meta name="copyright" content="BayMin">
+  <meta name="theme-color" content="#2c2c2c">
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.6.3/css/all.min.css">
+  
+  
+  <link rel="shortcut icon" type="image/x-icon" href="https://www.baymin.online/img/favicon.ico">
+  <link rel="icon" sizes="192x192" href="https://www.baymin.online/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="https://www.baymin.online/img/favicon.ico">
+  <link rel="manifest" href="https://www.baymin.online/img/site.webmanifest">
+  
+
+  
+  <link rel="shortcut icon" type="image/x-icon" href="https://www.baymin.online/img/favicon.ico">
+  
+
+  
+    <link rel="stylesheet" href="/style.css">
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-139607175-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-139607175-1');
+    </script>
+  
+  
+</head>
+
+
+<body>
+  
+  
+  <header class="l_header material">
+  <div id="loading-bar-wrapper">
+    <div id="loading-bar" class="material"></div>
+  </div>
+
+	<div class="wrapper">
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href="/">
+        
+          兔子的个人小站
+        
+      </a>
+			<div class="menu navgation">
+				<ul class="h-list">
+          
+  					
+  						<li>
+								<a class="nav flat-box" href="/" id="home">
+									<i class="fas fa-grin fa-fw"></i>&nbsp;文章
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/categories/" rel="nofollow" id="categories">
+									<i class="fas fa-folder-open fa-fw"></i>&nbsp;分类
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/tags/" rel="nofollow" id="tags">
+									<i class="fas fa-tags fa-fw"></i>&nbsp;标签
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/archives/" rel="nofollow" id="archives">
+									<i class="fas fa-archive fa-fw"></i>&nbsp;归档
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="搜索">
+						<i class="icon fas fa-search fa-fw"></i>
+					</form>
+				</div>
+			
+			<ul class="switcher h-list">
+				
+					<li class="s-search"><a class="fas fa-search fa-fw" href="javascript:void(0)"></a></li>
+				
+				<li class="s-menu"><a class="fas fa-bars fa-fw" href="javascript:void(0)"></a></li>
+			</ul>
+		</div>
+
+		<div class="nav-sub container container--flex">
+			<a class="logo flat-box"></a>
+			<ul class="switcher h-list">
+				<li class="s-comment"><a class="flat-btn fas fa-comments fa-fw" href="javascript:void(0)"></a></li>
+        
+          <li class="s-toc"><a class="flat-btn fas fa-list fa-fw" href="javascript:void(0)"></a></li>
+        
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu navgation">
+      <ul>
+        
+          
+            <li>
+							<a class="nav flat-box" href="/" id="home">
+								<i class=" fa-fw"></i>&nbsp;
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/" id="home">
+								<i class="fas fa-clock fa-fw"></i>&nbsp;近期文章
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/archives/" rel="nofollow" id="archives">
+								<i class="fas fa-archive fa-fw"></i>&nbsp;文章归档
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/friends/" rel="nofollow" id="friends">
+								<i class="fas fa-link fa-fw"></i>&nbsp;我的友链
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/about/" rel="nofollow" id="about">
+								<i class="fas fa-info-circle fa-fw"></i>&nbsp;关于小站
+							</a>
+            </li>
+          
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+<script>setLoadingBarProgress(40);</script>
+
+
+
+  <div class="l_body nocover">
+    <div class='body-wrapper'>
+      <div class="l_main">
+  
+
+  
+    <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/2018/12/11/Linux系统下搭建求生之路2专用服务器/">
+        在Linux系统下搭建求生之路2专用服务器（阿里云主机）
+      </a>
+    </h1>
+  
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="https://www.baymin.online" rel="nofollow">
+      
+        <img src="https://www.baymin.online/img/index_logo.png">
+      
+      <p>BayMin</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2018-12-11</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item category">
+    <a href="/categories/游戏服务器/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>游戏服务器</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class="notlink">
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          <p>整理以前的笔记时，发现还有个搭建求生之路2服务器的教程，索性就拿上来了~~~</p>
+<a id="more"></a>
+<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p><strong>重要提示</strong>：虽然搭建服务器可以方便大家游玩，但是不确定具体原因，求生之路2的服务器极容易被DDOS攻击 ( 根据以前经历，更改公网IP可以短暂避免攻击，大致也就好个一两天而已 ) 。而防御DDOS攻击则需要花费太多，因此打算自己建服的小伙伴们对此要有心理准备 ( 此处应有炸服dog死🐎 )。</p>
+<p>搭建求生服务器大体和饥荒服务器相同，前面关于云主机的配置请参考：<a href="https://www.baymin.online/2019/04/24/Linux%E7%B3%BB%E7%BB%9F%E4%B8%8B%E6%90%AD%E5%BB%BA%E9%A5%A5%E8%8D%92%E4%B8%93%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8/">Linux系统下饥荒专用服务器搭建</a>，需要注意的是云主机配置方面不需要像饥荒服务器那样需要那么大的内存了，1G内存就完全足够。</p>
+<h4 id="1-云主机的配置方面"><a href="#1-云主机的配置方面" class="headerlink" title="1.云主机的配置方面"></a>1.云主机的配置方面</h4><p>求生之路2的进程大致占用500M内存，因此配置选择1G完全足够使用。</p>
+<p>网络带宽方面根据tick和人数而定，由于好久没开过服了，具体占用数据也忘记了。如果打算60tick、4人游玩的战役服务器，1M的带宽应该是足够的。</p>
+<p>安全组方面，饥荒服务器默认端口是10998和10999，而求生之路的默认端口为27015。在安全组配置中添加：</p>
+<fancybox><br><img src="https://img.vim-cn.com/48/c68cb7657847fb35cb19ea76afa5fbdb73a416.png" alt="img"><br><img src="https://img.vim-cn.com/d9/80bc0acd8058e24ae96acc8a2f84757358a82a.png" alt="img"></fancybox>
+
+<p>不太确定求生之路2网络使用的什么协议 ( 大部分游戏使用的是UDP，因为速度快 )，所以这里开放两种协议的27015端口。</p>
+<h4 id="2-下载并安装游戏"><a href="#2-下载并安装游戏" class="headerlink" title="2.下载并安装游戏"></a>2.下载并安装游戏</h4><p>接下来在Xshell中操作Linux系统，下面命令按行敲入窗口中，按回车键执行。</p>
+<p>首先更新yum ( Linux系统中安装软件包的工具 ) : </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum update</span><br><span class="line">yum upgrade -y</span><br></pre></td></tr></table></figure>
+<p>安装游戏运行环境和常用工具</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install glibc.i686 libstdc++.i686 libcurl.i686 vim screen p7zip -y</span><br></pre></td></tr></table></figure>
+<p>创建steam用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">useradd steam </span><br><span class="line">su steam</span><br><span class="line">cd ~</span><br><span class="line">mkdir steamcmd</span><br><span class="line">cd steamcmd</span><br></pre></td></tr></table></figure>
+<p>下载并解压Steam的Linux客户端steamcmd</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz</span><br><span class="line">tar -zxvf steamcmd_linux.tar.gz</span><br></pre></td></tr></table></figure>
+<p>启动Steam客户端，并开始下载求生之路2服务器版 ( 求生之路2专用服务器ID为 222860) </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./steamcmd.sh +login anonymous +force_install_dir /home/l4d2 +app_update 222860 validate +quit</span><br></pre></td></tr></table></figure>
+<p>由于文件蛮大的，这里大概需要等半小时到一小时左右。</p>
+<h4 id="3-安装插件"><a href="#3-安装插件" class="headerlink" title="3.安装插件"></a>3.安装插件</h4><p><a href="https://pan.baidu.com/s/10w6SgBPemsnFsAHHqw5byw" target="_blank" rel="noopener">插件下载</a> ( 提取码：uppe ) </p>
+<p>其中插件平台文件为sourcemod和mmsource，可以去官网直接下载：<a href="https://www.sourcemod.net/downloads.php?branch=stable" target="_blank" rel="noopener">sourcemod</a>,<a href="http://www.sourcemm.net/downloads.php?branch=stable" target="_blank" rel="noopener">mmsource</a> </p>
+<p>然后下载VDF文件：( <a href="http://www.sourcemm.net/vdf" target="_blank" rel="noopener">网址</a> )</p>
+<fancybox><br><img src="https://img.vim-cn.com/1e/b8ec12d9f31d776e74867ac620ad9d9fe5c764.png" alt="img"></fancybox>
+
+<p>安装插件平台： ( tar为linux系统下的压缩文件，可以使用<a href="https://www.7-zip.org/" target="_blank" rel="noopener">7z</a>进行解压 )</p>
+<p>打开sourcemod-1.9.0-git6281-linux.tar.gz -&gt; sourcemod-1.9.0-git6281-linux.tar -&gt; 提取，路径为( *\l4d2_plug\ )</p>
+<p>打开mmsource-1.10.7-git970-linux.tar.gz -&gt; mmsource-1.10.7-git970-linux.tar -&gt; 提取，路径为( *\l4d2_plug\ )</p>
+<fancybox><br><br><img src="https://img.vim-cn.com/a3/cddc67641d2eebd8436582d734fc448d6f9da5.png" alt><br><br><img src="https://img.vim-cn.com/cb/68448d94e58fd183d72dcc40f663aa2ef3c57a.png" alt><br><br></fancybox>
+
+<p>安装解除tick限制插件：</p>
+<p>打开tickrate_enabler.zip -&gt; Package-l4d2  -&gt; 提取，路径与上面相同 ( *\l4d2_plug\ )</p>
+<p>安装l4d2toolz：( 忘记具体是干嘛的了😥)</p>
+<p>打开l4dtoolz(L4D2)-1.0.0.9h.zip -&gt; 提取，路径选择addons ( *\l4d2_plug\addons\ )</p>
+<p>安装自动换图插件：</p>
+<p>按照压缩包中的说明操作即可。</p>
+<p>其余插件：</p>
+<p>可以使用望夜插件合集包，解压 ( 密码为：望夜 ) 选择需要的插件，直接拖入即可。</p>
+<p>最终得到两个文件夹addons和cfg，打开Xftp工具：</p>
+<fancybox><img src="https://img.vim-cn.com/5f/33926626925feb83e503919bf2e7643c878490.png" alt="img"></fancybox>
+
+<p>左侧路径为上述两个文件夹的路径，右侧路径为/home/steam/l4d2/left4dead2：</p>
+<fancybox><img src="https://img.vim-cn.com/ff/418adc28980d67211b146b4505839f0577275c.png" alt="img"></fancybox>
+
+<p>直接将左侧文件夹拖拽入右侧，选择全部覆盖即可。由于steam用户没有添加密码，上传后默认为root用户，因此需要更改文件的所有者：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">exit</span><br><span class="line">chown -R steam:steam /home/steam </span><br><span class="line">su steam</span><br></pre></td></tr></table></figure>
+<h4 id="4-自定义服务器"><a href="#4-自定义服务器" class="headerlink" title="4.自定义服务器"></a>4.自定义服务器</h4><p>server.cfg可以对服务器进行一些自定义设置：<a href="http://game.ali213.net/thread-2812705-1-1.html" target="_blank" rel="noopener">参考</a> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">vim ~/l4d2/left4dead2/cfg/server.cfg</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 输入</span><br><span class="line">hostname "你的服务器名"</span><br><span class="line">sv_allow_lobby_connect_only "0" #允许大厅连接(在大厅选择最佳服务器时,有几率匹配到该服务器)</span><br><span class="line">z_difficulty "Normal" #游戏难度</span><br><span class="line">sv_cheats 1 #允许作弊</span><br><span class="line">sm_cvar sb_all_bot_game 1 #防止人数不足自动挂壁</span><br><span class="line">sm_cvar sv_region 4</span><br><span class="line">sm_cvar mp_disable_autokick 1 #闲置自动踢人,关闭设置0</span><br><span class="line">sm_cvar rcon_password "1234" #配合HLSW使用</span><br><span class="line"><span class="meta">#</span>剩下配置可以百度server.cfg设置</span><br><span class="line"><span class="meta">#</span>tick60-100配置</span><br><span class="line">sm_cvar sv_minrate 100000</span><br><span class="line">sm_cvar sv_maxrate 100000</span><br><span class="line">sm_cvar sv_minupdaterate 100</span><br><span class="line">sm_cvar sv_minupdaterate 100</span><br><span class="line">sm_cvar sv_mincmdrate 100</span><br><span class="line">sm_cvar sv_maxcmdrate 100</span><br><span class="line">sm_cvar sv_client_min_interp_ratio 1</span><br><span class="line">sm_cvar sv_client_max_interp_ratio 1</span><br><span class="line">sm_cvar fps_max 0</span><br><span class="line">sm_cvar net_splitpacket_maxrate 50000</span><br></pre></td></tr></table></figure>
+<p>开启60tick：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>启动命令中添加</span><br><span class="line">-tick 60</span><br></pre></td></tr></table></figure>
+<p>修改服务器服务器消息logo：</p>
+<p>图片对应文件为motd.txt和host.txt，host.txt为上边的小图，motd.txt为大图。</p>
+<p>图片请使用PS自行修改，将修改后的图片上传至网络相册 ( 可以使用QQ空间相册 )，上传后进入相册，打开图片，右键复制图片链接，然后将粘贴到motd.txt和host.txt中即可。也可以使用服务器存储图片，但是需要会使用nginx之类的反向代理软件，此处不多说明。</p>
+<p>设定管理员：</p>
+<p>进入游戏，在控制台输入status，可以看到如下：</p>
+<p>其中STEAM_xxx即为你的steamID</p>
+<p>在服务器端编辑文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vim ~/l4d2/left4dead2/addons/sourcemod/configs/admins_simple.ini</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>在最下面输入</span><br><span class="line">"你的steamID" "99:z"</span><br></pre></td></tr></table></figure>
+<h4 id="5-启动脚本"><a href="#5-启动脚本" class="headerlink" title="5.启动脚本"></a>5.启动脚本</h4><p>编写启动脚本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/l4d2_script</span><br><span class="line">cd ~/l4d2_script</span><br><span class="line">touch l4d2_run.sh</span><br><span class="line">chmod a+x l4d2_run.sh</span><br><span class="line"><span class="meta">#</span> 编辑脚本</span><br><span class="line"></span><br><span class="line">vim l4d2_run.sh</span><br><span class="line"><span class="meta">#</span> 输入</span><br><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line"></span><br><span class="line">cd ~/l4d2</span><br><span class="line">screen -dmS "l4d2_server" ./srcds_run -game left4dead2 -condebug +exec server.cfg</span><br><span class="line"><span class="meta">#</span> 保存退出</span><br></pre></td></tr></table></figure>
+<p>使用 <a href="https://www.cnblogs.com/lpfuture/p/5786843.html" target="_blank" rel="noopener">screen</a> -dmS 命令启动进程时，不会显示对应的控制台。如果需要使用控制台，则需要使用</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 恢复到地面世界进程</span><br><span class="line">screen -r l4d2_server</span><br><span class="line"><span class="meta">#</span> 隐藏控制台按下Ctrl+A然后按下Ctrl+D即可</span><br></pre></td></tr></table></figure>
+<p>启动游戏，运行脚本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/l4d2_script/l4d2_run.sh</span><br></pre></td></tr></table></figure>
+<p>等服务器启动后，可以使用控制台或者服务器列表中搜索到服务器：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>控制台连接</span><br><span class="line">进入游戏,先在设置中允许使用开发者控制台</span><br><span class="line">然后按~启动控制台,输入connect 服务器ip:服务器端口号(27015)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>服务器大厅连接</span><br><span class="line">启动控制台,然后输入openserverbrowser回车,然后查找你的服务器名即可</span><br></pre></td></tr></table></figure>
+<h4 id="6-关于更新"><a href="#6-关于更新" class="headerlink" title="6.关于更新"></a>6.关于更新</h4><p>编写更新脚本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">touch ~/l4d2_script/update.sh</span><br><span class="line">chmod a+x ~/l4d2_script/update.sh</span><br><span class="line">vim ~/l4d2_script/update.sh</span><br></pre></td></tr></table></figure>
+<p>输入</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>更新游戏</span><br><span class="line">~/steamcmd/steamcmd.sh +login anonymous +force_install_dir /home/steam/dst +app_update 222860 validate +quit</span><br></pre></td></tr></table></figure>
+<p>执行时需要关闭服务器。</p>
+<h4 id="7-关于三方图"><a href="#7-关于三方图" class="headerlink" title="7.关于三方图"></a>7.关于三方图</h4><p>嗯！三方图很重要，不过服务器端使用三方图稍微有点麻烦：</p>
+<p>① 资源网站上下载三方图 ( 其实也可以直接用服务器直接下载，但是好多资源站不能使用wget直接下载，也没有仔细研究过怎么使用，暂时还是使用下载后上传的方式吧 )；</p>
+<p>② 解压三方图，安装到本地；</p>
+<p>③ 然后使用7z压缩三方图，尽量选择 .7z 格式 ( 这个格式的压缩比还是挺不错的 )；</p>
+<p>④ 之后将压缩包丢到服务器的addons文件夹中，在服务器上修改文件所有者;</p>
+<p>⑤ 使用命令解压</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">7z x 文件名.7z</span><br></pre></td></tr></table></figure>
+<p>重启服务器即可自动装载三方图。</p>
+<p>如何启动三方图呢？方式也有很多种：</p>
+<p>① 在服务器启动命令中添加：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+map 开图命令(可从三方站中找到)</span><br></pre></td></tr></table></figure>
+<p>② 在服务器控制台使用命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">map 开图命令</span><br></pre></td></tr></table></figure>
+<p>③ 使用HLSW远程管理服务器开服：</p>
+<p>需要下载<a href="https://pan.baidu.com/s/1jAEGSbRTmAgOJ39o3im8-w" target="_blank" rel="noopener">HLSW软件</a> ( 提取码：7cem )，并且server.cfg中配置sm_cvar rcon_password参数</p>
+<p>PS：需要注意端口号为27015，修改后无法连接（不知原因为何）</p>
+<p>④ 自己编写换图插件：</p>
+<p>使用方法参考：<a href="http://cache.baiducontent.com/c?m=9f65cb4a8c8507ed4fece76310508c31490797634b87834e29938448e435061e5a24feb82324120fd5c27b6506b84828a8ab6065367520b59ccc8840d8bf912c2c9f2730314bd15615a747e7dc4753c234d507a9f916a6e7b772c2f9c5d2af0b0e9c44040a9780884d7716dd19f0034693b19838022f66ad9c41728f586058ee&amp;p=8e3ed116d9c10afe08e29f7e4907&amp;newp=9064c31c85cc43fb10bd9b750d5792695d0fc20e39d7c44324b9d71fd325001c1b69e7bf2c201703d8c5796206aa4f5feaf53271321766dada9fca458ae7c47c67&amp;user=baidu&amp;fm=sc&amp;query=sourcemod%B1%E0%D2%EB%BD%CC%B3%CC&amp;qid=d43a57570005db47&amp;p1=4" target="_blank" rel="noopener">插件制作教程</a></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sourcemod&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> Plugin:myinfo = &#123;</span><br><span class="line">	name = <span class="string">"change map"</span>,</span><br><span class="line">	author = <span class="string">"BayMin"</span>,</span><br><span class="line">	description = <span class="string">"change map"</span>,</span><br><span class="line">	version = <span class="string">"0.1"</span>,</span><br><span class="line">	url = <span class="string">"http://www.sourcemod.net/"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> OnPluginStart( )&#123;</span><br><span class="line">		RegAdminCmd(<span class="string">"sm_adminmap"</span>, newmap, ADMFLAG_GENERIC, <span class="string">"changemap"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> Action:newmap(client,args)&#123;</span><br><span class="line">	<span class="keyword">new</span> Handle:menu = CreateMenu(ModeMenuHandler);</span><br><span class="line">	SetMenuTitle(menu,<span class="string">"切换地图"</span>);</span><br><span class="line">	AddMenuItem(menu,<span class="string">"option1"</span>,<span class="string">"地图切换"</span>);</span><br><span class="line">	SetMenuExitButton(menu,<span class="literal">true</span>);</span><br><span class="line">	DisplayMenu(menu, client, MENU_TIME_FOREVER);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ModeMenuHandler</span><span class="params">(Handle:menu,MenuAction:action,client,itemNum)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> ( action == MenuAction_Select )&#123;</span><br><span class="line">		<span class="keyword">switch</span> (itemNum)&#123;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">0</span> : &#123;</span><br><span class="line">				MapMenuChoose1(client,<span class="number">0</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> Action <span class="title">MapMenuChoose1</span><span class="params">(client,args)</span></span>&#123;</span><br><span class="line">	<span class="keyword">new</span> Handle:menu = CreateMenu(MapMenuChooseHandler1);</span><br><span class="line">	SetMenuTitle(menu,<span class="string">"请选择地图"</span>);</span><br><span class="line">	AddMenuItem(menu,<span class="string">"option1"</span>,<span class="string">"伦理问题2"</span>);</span><br><span class="line">	AddMenuItem(menu,<span class="string">"option2"</span>,<span class="string">"生化危机3"</span>);</span><br><span class="line">	AddMenuItem(menu,<span class="string">"option3"</span>,<span class="string">"维也纳的呼唤2"</span>);</span><br><span class="line">	AddMenuItem(menu,<span class="string">"option4"</span>,<span class="string">"再见了晨茗"</span>);</span><br><span class="line">	AddMenuItem(menu,<span class="string">"option5"</span>,<span class="string">"Faked"</span>);</span><br><span class="line">	SetMenuExitButton(menu,<span class="literal">true</span>);</span><br><span class="line">	DisplayMenu(menu, client, MENU_TIME_FOREVER);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">MapMenuChooseHandler1</span><span class="params">(Handle:menu,MenuAction:action,client,itemNum)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> ( action == MenuAction_Select )&#123;</span><br><span class="line">		<span class="keyword">switch</span> (itemNum)&#123;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">0</span> : &#123;</span><br><span class="line">				 ServerCommand(<span class="string">"changelevel qe2_ep1"</span>); </span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">1</span> : &#123;</span><br><span class="line">				 ServerCommand(<span class="string">"changelevel re3m1"</span>); </span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">2</span> : &#123;</span><br><span class="line">				 ServerCommand(<span class="string">"changelevel l4d_viennacalling2_1"</span>); </span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">3</span> : &#123;</span><br><span class="line">				 ServerCommand(<span class="string">"changelevel msd1_town"</span>); </span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">4</span> : &#123;</span><br><span class="line">				 ServerCommand(<span class="string">"changelevel prooemium2"</span>); </span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="附-利用创意工坊中的mod实现admin管理功能"><a href="#附-利用创意工坊中的mod实现admin管理功能" class="headerlink" title="附 : 利用创意工坊中的mod实现admin管理功能"></a>附 : 利用创意工坊中的mod实现admin管理功能</h4><p>如果你使用过<a href="https://steamcommunity.com/sharedfiles/filedetails/?id=214630948" target="_blank" rel="noopener">Admin System</a>，会发现这个Mod比插件带的管理员功能好用太多了，但如何将Mod放入服务器并可以使用呢？因为Admin System可以给其他玩家增加管理员权限，所以我们可以利用这种方法向客户端添加服务器管理员。</p>
+<p>① 首先下载Mod。我们在创意工坊订阅的Mod都会下载到游戏目录下addons -&gt; workshop中，该文件夹中的文件是以创意工坊ID的形式命名的。</p>
+<p>② 安装Mod。Admin System的ID为214630948，将对应文件拖入到服务器的addons文件夹中，就完成了Mod的安装。</p>
+<p>③ 该mod会在游戏目录中生成一个ems文件夹，打开ems -&gt; admin_system 里面有个 admin.txt ，该文件记录着管理员的SteamID，因此我们直接将整个文件夹拖入服务器的left4dead2文件夹中，就可以完成Mod的配置。</p>
+<p>④ 接下来只需要重启服务器，然后进入测试Mod是否可用即可。</p>
+<h4 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h4><p>① <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=276173458&amp;searchtext=server" target="_blank" rel="noopener">Left 4 Dead 2 Dedicated Server Guide</a></p>
+<p>② <a href="http://cache.baiducontent.com/c?m=9f65cb4a8c8507ed4fece76310508c31490797634b87834e29938448e435061e5a24feb82324120fd5c27b6506b84828a8ab6065367520b59ccc8840d8bf912c2c9f2730314bd15615a747e7dc4753c234d507a9f916a6e7b772c2f9c5d2af0b0e9c44040a9780884d7716dd19f0034693b19838022f66ad9c41728f586058ee&amp;p=8e3ed116d9c10afe08e29f7e4907&amp;newp=9064c31c85cc43fb10bd9b750d5792695d0fc20e39d7c44324b9d71fd325001c1b69e7bf2c201703d8c5796206aa4f5feaf53271321766dada9fca458ae7c47c67&amp;user=baidu&amp;fm=sc&amp;query=sourcemod%B1%E0%D2%EB%BD%CC%B3%CC&amp;qid=d43a57570005db47&amp;p1=4" target="_blank" rel="noopener">插件制作教程</a></p>
+
+        </div>
+        
+          
+
+
+  <section class="meta" id="footer-meta">
+    <hr>
+    <div class="new-meta-box">
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-05-20T17:46:27+08:00">
+  <a class="notlink">
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>最后更新于 2019年5月20日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Linux/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>Linux</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/求生之路2/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>求生之路2</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/专用服务器/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>专用服务器</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Shell/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>Shell</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/阿里云/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>阿里云</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+            <div class="prev-next">
+                
+                    <section class="prev">
+                        <span class="art-item-left">
+                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
+                            <h4>
+                                <a href="/2018/12/12/Greenplum数据库迁移/" rel="prev" title="Greenplum数据库迁移">
+                                  
+                                      Greenplum数据库迁移
+                                  
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/Greenplum/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>Greenplum</a> <a class="tag" href="/tags/数据库/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>数据库</a> <a class="tag" href="/tags/数据迁移/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>数据迁移</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h4>
+                                <a href="/2018/12/05/Greenplum查看数据库和表所占磁盘大小/" rel="prev" title="Greenplum查看数据库和表所占磁盘大小">
+                                    
+                                        Greenplum查看数据库和表所占磁盘大小
+                                    
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/Greenplum/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>Greenplum</a> <a class="tag" href="/tags/数据库/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>数据库</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+            </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments">
+    <section class="article typo">
+      <h4><i class="fas fa-comments fa-fw" aria-hidden="true"></i>&nbsp;评论</h4>
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-spinner fa-spin fa-fw"></i>
+          </div>
+        </section>
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: '在Linux系统下搭建求生之路2专用服务器（阿里云主机）',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class="l_side">
+  
+    
+    
+      
+        
+          
+          
+            <section class="widget author">
+  <div class="content material">
+    
+      <div class="avatar">
+        <img class="avatar" src="https://img.vim-cn.com/a0/c8b973bbbc1fbe0830d5a0ead35df99be81219.png">
+      </div>
+    
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="https://steamcommunity.com/id/rabiribizhendexiaotuzi/" class="social fab fa-steam flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:baiyukai.i@outlook.com" class="social fas fa-envelope flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/BayMinGitHub" class="social fab fa-github-alt flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://twitter.com/BayMin11" class="social fab fa-twitter flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+          
+        
+      
+        
+          
+          
+            
+  <section class="widget toc-wrapper">
+    
+<header class="material">
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  
+    <div class="wrapper"><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+  
+</header>
+
+    <div class="content material">
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-云主机的配置方面"><span class="toc-text">1.云主机的配置方面</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-下载并安装游戏"><span class="toc-text">2.下载并安装游戏</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-安装插件"><span class="toc-text">3.安装插件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-自定义服务器"><span class="toc-text">4.自定义服务器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-启动脚本"><span class="toc-text">5.启动脚本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-关于更新"><span class="toc-text">6.关于更新</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-关于三方图"><span class="toc-text">7.关于三方图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#附-利用创意工坊中的mod实现admin管理功能"><span class="toc-text">附 : 利用创意工坊中的mod实现admin管理功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考文档"><span class="toc-text">参考文档</span></a></li></ol>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+  <section class="widget category">
+    
+<header class="material">
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
+  
+    <a class="rightBtn" rel="nofollow" href="/categories/" title="categories/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class="content material">
+      <ul class="entry">
+        
+          <li><a class="flat-box" title="/categories/Greenplum/" href="/categories/Greenplum/"><div class="name">Greenplum</div><div class="badge">(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/Java/" href="/categories/Java/"><div class="name">Java</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/游戏服务器/" href="/categories/游戏服务器/"><div class="name">游戏服务器</div><div class="badge">(2)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+  <section class="widget tagcloud">
+    
+<header class="material">
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
+  
+    <a class="rightBtn" rel="nofollow" href="/tags/" title="tags/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class="content material">
+      <a href="/tags/Greenplum/" style="font-size: 24px; color: #555">Greenplum</a> <a href="/tags/Java/" style="font-size: 14px; color: #999">Java</a> <a href="/tags/Linux/" style="font-size: 24px; color: #555">Linux</a> <a href="/tags/Shell/" style="font-size: 24px; color: #555">Shell</a> <a href="/tags/专用服务器/" style="font-size: 24px; color: #555">专用服务器</a> <a href="/tags/工具类/" style="font-size: 14px; color: #999">工具类</a> <a href="/tags/数据库/" style="font-size: 24px; color: #555">数据库</a> <a href="/tags/数据迁移/" style="font-size: 14px; color: #999">数据迁移</a> <a href="/tags/求生之路2/" style="font-size: 14px; color: #999">求生之路2</a> <a href="/tags/阿里云/" style="font-size: 24px; color: #555">阿里云</a> <a href="/tags/饥荒/" style="font-size: 14px; color: #999">饥荒</a>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+
+
+  <section class="widget music">
+    
+<header class="material">
+  <div><i class="fas fa-compact-disc fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;播放列表</div>
+  
+    <a class="rightBtn" rel="external nofollow noopener noreferrer" target="_blank" href="https://music.163.com/#/user/home?id=122081486" title="https://music.163.com/#/user/home?id=122081486">
+    <i class="far fa-heart fa-fw"></i></a>
+  
+</header>
+
+    <div class="content material">
+      
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.css">
+  <div class="aplayer" data-theme="#2c2c2c" data-mode="circulation" data-server="netease" data-type="playlist" data-id="151902279" data-volume="0.7">
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
+
+
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            <section class="widget grid">
+  
+<header class="material">
+  <div><i class="fas fa-map-signs fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;站内导航</div>
+  
+</header>
+
+  <div class="content material">
+    <ul class="grid navgation">
+      
+        <li><a class="flat-box" title="/" href="/" id="home">
+          
+            <i class="fas fa-clock fa-fw" aria-hidden="true"></i>
+          
+          近期文章
+        </a></li>
+      
+        <li><a class="flat-box" title="/archives/" href="/archives/" rel="nofollow" id="archives">
+          
+            <i class="fas fa-archive fa-fw" aria-hidden="true"></i>
+          
+          文章归档
+        </a></li>
+      
+        <li><a class="flat-box" title="/friends/" href="/friends/" rel="nofollow" id="friends">
+          
+            <i class="fas fa-link fa-fw" aria-hidden="true"></i>
+          
+          我的友链
+        </a></li>
+      
+        <li><a class="flat-box" title="/about/" href="/about/" rel="nofollow" id="about">
+          
+            <i class="fas fa-info-circle fa-fw" aria-hidden="true"></i>
+          
+          关于小站
+        </a></li>
+      
+    </ul>
+  </div>
+</section>
+
+          
+        
+      
+    
+
+  
+</aside>
+
+<footer id="footer" class="clearfix">
+  
+  
+  <div class="social-wrapper">
+    
+    
+    <a href="https://steamcommunity.com/id/rabiribizhendexiaotuzi/" class="social fab fa-steam flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+    </a>
+    
+      
+    
+    <a href="mailto:baiyukai.i@outlook.com" class="social fas fa-envelope flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+    </a>
+    
+      
+    
+    <a href="https://github.com/BayMinGitHub" class="social fab fa-github-alt flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+    </a>
+    
+      
+    
+    <a href="https://twitter.com/BayMin11" class="social fab fa-twitter flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+    </a>
+    
+      
+  </div>
+  
+  <br>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+  <div>
+    Power by HEXO
+    <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
+    as theme
+    <!--  -->
+    <!-- ， -->
+    <!-- 总访问量为 -->
+    <!-- <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
+    次
+    
+    。 -->
+  </div>
+  <div>
+    <p>
+    <a href="http://www.miitbeian.gov.cn/" target="_blank">京ICP备19021296号-1</a> |
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802028764">
+      <img src="/img/ba_logo.png" style="vertical-align: top">京公网安备 11010802028764号</a>
+    </p>
+  </div>
+</footer>
+<script>setLoadingBarProgress(80);</script>
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
+
+
+  <script async src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      const $reveal = $('.reveal');
+      if ($reveal.length === 0) return;
+      const sr = ScrollReveal({ distance: 0 });
+      sr.reveal('.reveal');
+    });
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/av-min.js"></script>
+  
+    
+      <script src="/js/volantis.js"></script>
+    
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var notify = 'false' == true;
+  var verify = 'false' == true;
+  var valine = new Valine();
+  valine.init({
+    el: '#valine_container',
+    notify: notify,
+    verify: verify,
+    guest_info: guest_info,
+    
+    appId: "W4rdjcbtNTwN4vQSBRpgeCwo-gzGzoHsz",
+    appKey: "UKgl0FCED9JmgK1LQq3TETNw",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'mp',
+    lang:'zh-cn',
+    highlight:'false'
+  })
+  </script>
+
+
+
+  <script src="/js/app.js"></script>
+
+
+  <script src="/js/search.js"></script>
+
+
+
+
+<!-- 复制 -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      clipboard.on('success', function(e) {
+        //您可以加入成功提示
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        success_prompt(COPY_SUCCESS);
+        e.clearSelection();
+      });
+      clipboard.on('error', function(e) {
+        //您可以加入失败提示
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+        fail_prompt(COPY_FAILURE);
+      });
+    }
+    initCopyCode();
+
+  }(window, document);
+
+  /**
+   * 弹出式提示框，默认1.5秒自动消失
+   * @param message 提示信息
+   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+   * @param time 消失时间
+   */
+  var prompt = function (message, style, time)
+  {
+      style = (style === undefined) ? 'alert-success' : style;
+      time = (time === undefined) ? 1500 : time*1000;
+      $('<div>')
+          .appendTo('body')
+          .addClass('alert ' + style)
+          .html(message)
+          .show()
+          .delay(time)
+          .fadeOut();
+  };
+
+  // 成功提示
+  var success_prompt = function(message, time)
+  {
+      prompt(message, 'alert-success', time);
+  };
+
+  // 失败提示
+  var fail_prompt = function(message, time)
+  {
+      prompt(message, 'alert-danger', time);
+  };
+
+  // 提醒
+  var warning_prompt = function(message, time)
+  {
+      prompt(message, 'alert-warning', time);
+  };
+
+  // 信息提示
+  var info_prompt = function(message, time)
+  {
+      prompt(message, 'alert-info', time);
+  };
+
+</script>
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+
+</html>
+<!--动态线条背景-->
+<!-- <script type="text/javascript" color="201,131,75" opacity='0.7' zIndex="-2" count="200"
+  src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+  </script> -->
